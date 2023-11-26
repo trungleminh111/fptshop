@@ -72,14 +72,23 @@ body {
 .menuCategory {
     margin: 0;
     list-style-type: none;
-
 }
 
-.botHeader-category {
+.botHeader-menuCategory--li {
     color: #FFFFFF;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 5px 0;
+}
+
+.botHeader-menuCategory--li:hover{
+    background-color: #FFFFFF;
+    filter: invert(0) !important;
+    color: #000000;
+}
+.botHeader-menuCategory--li:hover .category-image{
+    filter: invert(0) !important;
 }
 
 .botHeader-category-link {
@@ -295,13 +304,11 @@ body {
 }
 
 .pPhone-item {
-    padding: 20px;
+    padding: 10px;
     background-color: #FFFFFF;
     display: flex;
     flex-direction: column;
     margin: 5px 0;
-    transition: border 2s;
-
 }
 
 .pPhoneHeader {
@@ -312,7 +319,7 @@ body {
 }
 
 .pPhone-item:hover {
-    border: 1px solid #252525;
+    outline: solid 2px #cd1818;
 }
 .pPhone-item:hover .pPhone-img {
     scale: 1.05;
@@ -322,6 +329,7 @@ body {
     position: relative;
     display: flex;
     justify-content: center;
+    overflow: hidden;
     /* border: 1px solid #cd1818; */
 }
 

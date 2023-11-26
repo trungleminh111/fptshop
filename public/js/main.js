@@ -3,6 +3,7 @@ $(document).ready(function () {
         loop:true,
         margin:10,
         dots:false,
+        lazyLoad: true,
         autoplay: true,
         autoplayTimeout: 3000,
         responsiveClass:true,

@@ -17,11 +17,11 @@
             <div class="container h-100">
                 <div class="row h-100 align-items-center">
                     <div class="topHeader-logo col-md-2">
-                        <img src="{{asset('images/Logo.png')}}" alt="" class="topHeader-logo--img col-md-12">
+                        <a href="/"><img src="{{asset('images/Logo.png')}}" alt="" class="topHeader-logo--img col-md-12"></a>
                     </div>
-                    <form action="#" class="col-md-5">
+                    <form action="{{ route('search') }}" method="GET" class="col-md-5">
                         <div class="box-search">
-                            <input type="text" class="search-header col-md-10"
+                            <input type="text" class="search-header col-md-10" name="search"
                                 placeholder="Nhập tên điện thoại, máy tính, phụ kiện... cần tìm">
                             <button class="btn-search"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </div>
@@ -32,12 +32,6 @@
                             <span>Tin Tức</span>
                         </a>
                     </div>
-                    <!-- <div class="col-md">
-                        <a href="" class="link-topheader">
-                            <span><i class="fa-solid fa-file-lines"></i></span>
-                            <span>Dịch Vụ</span>
-                        </a>
-                    </div> -->
                     <div class="col-md">
                         <a href="" class="link-topheader">
                             <span><i class="fa-solid fa-cart-shopping"></i></span>
@@ -56,31 +50,15 @@
         <div class="botHeader">
             <div class="container h-100">
                 <div class="row h-100 align-items-center">
-                    <ul class="menuCategory d-flex">
-                        <li class="botHeader-category col-md">
-                            <span><i class="fa-solid fa-mobile-screen-button"></i></span>
-                            <a href="" class="botHeader-category-link">Điện Thoại</a>
-                        </li>
-                        <li class="botHeader-category col-md">
-                            <span><i class="fa-solid fa-mobile-screen-button"></i></span>
-                            <a href="" class="botHeader-category-link">Điện Thoại</a>
-                        </li>
-                        <li class="botHeader-category col-md">
-                            <span><i class="fa-solid fa-mobile-screen-button"></i></span>
-                            <a href="" class="botHeader-category-link">Điện Thoại</a>
-                        </li>
-                        <li class="botHeader-category col-md">
-                            <span><i class="fa-solid fa-mobile-screen-button"></i></span>
-                            <a href="" class="botHeader-category-link">Điện Thoại</a>
-                        </li>
-                        <li class="botHeader-category col-md">
-                            <span><i class="fa-solid fa-mobile-screen-button"></i></span>
-                            <a href="" class="botHeader-category-link">Điện Thoại</a>
-                        </li>
-                        <li class="botHeader-category col-md">
-                            <span><i class="fa-solid fa-mobile-screen-button"></i></span>
-                            <a href="" class="botHeader-category-link">Điện Thoại</a>
-                        </li>
+                    <ul class="menuCategory d-flex h-100">
+                        @foreach($categorys as $category)
+                            <a href="../category/{{ $category->id }}" class="botHeader-category-link col-md h-100">
+                                <li class="botHeader-menuCategory--li col-md h-100">
+                                <img src="../uploads/{{$category->image}}" alt="" class="category-image h-100" style="filter: invert(1);">
+                                <span class="">{{$category->name}}</span>
+                                </li>
+                            </a>
+                        @endforeach
                     </ul>
                 </div>
             </div>

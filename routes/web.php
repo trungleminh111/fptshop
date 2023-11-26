@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [App\Http\Controllers\HomePublicController::class, 'index']);
+Route::get('/category/{id}', [App\Http\Controllers\HomePublicController::class, 'category']);
+Route::get('/search', [App\Http\Controllers\HomePublicController::class, 'search'])->name('search');
+
 
 
 Auth::routes();
