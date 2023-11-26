@@ -26,7 +26,11 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = "/";
+    protected function logined($request, $user)
+    {
+        return redirect($this->redirectTo)->with('authsuccess', 'Đăng nhập thành công');
+    }
 
     /**
      * Create a new controller instance.
