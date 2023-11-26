@@ -47,9 +47,9 @@
                     </div>
                     <div class="form-group">
                         <label for="">Phone</label>
-                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                            name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                        @error('email')
+                        <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror"
+                            name="phone" value="{{ old('phone') }}" required autocomplete="phone" autofocus>
+                        @error('phone')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -57,9 +57,9 @@
                     </div>
                     <div class="form-group">
                         <label for="">Email</label>
-                        <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror"
-                            name="phone" value="{{ old('phone') }}" required autocomplete="phone" autofocus>
-                        @error('phone')
+                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
+                            name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                        @error('email')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -86,7 +86,7 @@
 
                     <div class="mt-3">
                         <button type="submit" class="btn btn-custom">
-                            {{ __('Login') }}
+                            {{ __('Register') }}
                         </button>
 
                     </div>
