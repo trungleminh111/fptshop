@@ -16,16 +16,12 @@
     <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 </head>
-<<<<<<< HEAD
+
 
 <body
     style="background-image: url(&quot;https://images.fpt.shop/unsafe/fit-in/filters:quality(95):fill(transparent)/fptshop.com.vn/Uploads/Originals/2023/11/20/638361139780215625_desk-header-bg.png&quot;); background-color: rgb(178, 5, 0);">
 
-=======
 
-<body style="background-image: url(&quot;https://images.fpt.shop/unsafe/fit-in/filters:quality(95):fill(transparent)/fptshop.com.vn/Uploads/Originals/2023/11/20/638361139780215625_desk-header-bg.png&quot;); background-color: rgb(178, 5, 0);">
-
->>>>>>> 409ca80234b4adefb0d1b7460586fceefae5cf2a
     <header class="ht-header">
         <div class="topHeader">
             <div class="container h-100">
@@ -76,8 +72,6 @@
                         </div>
                         @endguest
                     </div>
-                    
-
                 </div>
             </div>
         </div>
