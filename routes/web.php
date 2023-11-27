@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,7 +20,15 @@ Route::get('/search', [App\Http\Controllers\HomePublicController::class, 'search
 
 
 Auth::routes();
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
 
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+ 
+    return redirect('/home');
+})->middleware(['auth', 'signed'])->name('verification.verify');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/add-to-cart', [App\Http\Controllers\CartController::class, 'addtocart'])->name('addtocart');
 Route::post('/update-cart', [App\Http\Controllers\CartController::class, 'updatecart'])->name('update_cart');
