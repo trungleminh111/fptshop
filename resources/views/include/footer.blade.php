@@ -83,12 +83,38 @@
                 </div>
             </div>
         </div>
+        <button id="test">test</button>
         <div class="footerBot">
             <span>Copy Right HieuTrung</span>
         </div>
     </div>
 
 </footer>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#test').click(function (e) {
+            e.preventDefault();
+            var ele = $(this);
+            console.log(ele);
+            $.ajax({
+                url: '{{ route('update_cart') }}',
+                method: "POST",
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    cart_id: 3,
+                    //quantity update cart
+                    quantity:10
+                    //delete bỏ quantity
+                },
+                success: function (response) {
+                    window.location.reload();
+                }
+            });
+
+        });
+    })
+</script>
 @if (Session::has('authsuccess'))
 <script>
 
@@ -99,8 +125,48 @@
     })
 </script>
 @endif
+@if (Session::has('success'))
+<script>
+
+    Swal.fire({
+        icon: 'success',
+        text: "{{Session::get('success')}}",
+        background: 'white',
+    })
+</script>
+@endif
+@if (Session::has('success'))
+<script>
+
+    Swal.fire({
+        icon: 'success',
+        text: "{{Session::get('success')}}",
+        background: 'white',
+    })
+</script>
+@endif
+@if (Session::has('error'))
+<script>
+
+    Swal.fire({
+        icon: 'error',
+        text: "{{Session::get('error')}}",
+        background: 'white',
+    })
+</script>
+@endif
+@if (Session::has('authloginsuccess'))
+<script>
+
+    Swal.fire({
+        icon: 'success',
+        text: "{{Session::get('authloginsuccess')}}",
+        background: 'white',
+    })
+</script>
+@endif
 <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
 <script src="{{asset('js/main.js')}}"></script>
 <script src="{{asset('OwlCarousel/dist/owl.carousel.min.js')}}"></script>
 </body>
