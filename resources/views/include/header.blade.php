@@ -59,49 +59,7 @@
                             <span><i class="fa-solid fa-circle-user"></i></span>
                             <span>Tài Khoản Của Tôi</span>
                         </a>
-<<<<<<< HEAD
-                    </div>
-                    <div class="col-md">
-                        <ul>
-                            @guest
-                            @if (Route::has('login'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @endif
 
-                            @if (Route::has('register'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                            </li>
-                            @endif
-                            @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-
-                                </div>
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </li>
-                            @endguest
-                        </ul>
-                    </div>
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-
-                    </ul>
-=======
                         @endif
                         @else
                         <a href="" class="link-topheader">
@@ -119,7 +77,7 @@
                         @endguest
                     </div>
                     
->>>>>>> 409ca80234b4adefb0d1b7460586fceefae5cf2a
+
                 </div>
             </div>
         </div>
@@ -130,13 +88,10 @@
                         @foreach($categorys as $category)
                         <a href="../category/{{ $category->id }}" class="botHeader-category-link col-md h-100">
                             <li class="botHeader-menuCategory--li col-md h-100">
-<<<<<<< HEAD
                                 <img src="../uploads/{{$category->image}}" alt="" class="category-image h-100"
                                     style="filter: invert(1);">
-=======
-                                <img src="../uploads/{{$category->image}}" alt="" class="category-image h-100" style="filter: invert(1);">
->>>>>>> 409ca80234b4adefb0d1b7460586fceefae5cf2a
-                                <span class="">{{$category->name}}</span>
+
+                             
                             </li>
                         </a>
                         @endforeach
