@@ -8,6 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('css/login.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="{{asset('OwlCarousel/dist/assets/owl.carousel.min.css')}}">
     <link rel="stylesheet" href="{{asset('OwlCarousel/dist/assets/owl.theme.default.min.css')}}">
@@ -15,10 +16,16 @@
     <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 </head>
+<<<<<<< HEAD
 
 <body
     style="background-image: url(&quot;https://images.fpt.shop/unsafe/fit-in/filters:quality(95):fill(transparent)/fptshop.com.vn/Uploads/Originals/2023/11/20/638361139780215625_desk-header-bg.png&quot;); background-color: rgb(178, 5, 0);">
 
+=======
+
+<body style="background-image: url(&quot;https://images.fpt.shop/unsafe/fit-in/filters:quality(95):fill(transparent)/fptshop.com.vn/Uploads/Originals/2023/11/20/638361139780215625_desk-header-bg.png&quot;); background-color: rgb(178, 5, 0);">
+
+>>>>>>> 409ca80234b4adefb0d1b7460586fceefae5cf2a
     <header class="ht-header">
         <div class="topHeader">
             <div class="container h-100">
@@ -29,8 +36,7 @@
                     </div>
                     <form action="{{ route('search') }}" method="GET" class="col-md-5">
                         <div class="box-search">
-                            <input type="text" class="search-header col-md-10" name="search"
-                                placeholder="Nhập tên điện thoại, máy tính, phụ kiện... cần tìm">
+                            <input type="text" class="search-header col-md-10" name="search" placeholder="Nhập tên điện thoại, máy tính, phụ kiện... cần tìm">
                             <button class="btn-search"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </div>
                     </form>
@@ -46,11 +52,14 @@
                             <span>Giỏ Hàng</span>
                         </a>
                     </div>
-                    <div class="col-md">
-                        <a href="" class="link-topheader">
+                    <div class="col-md topHeader-user">
+                        @guest
+                        @if (Route::has('login'))
+                        <a href="{{ route('login') }}" class="link-topheader">
                             <span><i class="fa-solid fa-circle-user"></i></span>
                             <span>Tài Khoản Của Tôi</span>
                         </a>
+<<<<<<< HEAD
                     </div>
                     <div class="col-md">
                         <ul>
@@ -92,6 +101,25 @@
                         <!-- Authentication Links -->
 
                     </ul>
+=======
+                        @endif
+                        @else
+                        <a href="" class="link-topheader">
+                            <span><i class="fa-solid fa-circle-user"></i></span>
+                            <span>{{ Auth::user()->name }}</span>
+                        </a>
+                        <div class="userMenu">
+                            <a class="dropdown-item logoutUser" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                        @endguest
+                    </div>
+                    
+>>>>>>> 409ca80234b4adefb0d1b7460586fceefae5cf2a
                 </div>
             </div>
         </div>
@@ -102,8 +130,12 @@
                         @foreach($categorys as $category)
                         <a href="../category/{{ $category->id }}" class="botHeader-category-link col-md h-100">
                             <li class="botHeader-menuCategory--li col-md h-100">
+<<<<<<< HEAD
                                 <img src="../uploads/{{$category->image}}" alt="" class="category-image h-100"
                                     style="filter: invert(1);">
+=======
+                                <img src="../uploads/{{$category->image}}" alt="" class="category-image h-100" style="filter: invert(1);">
+>>>>>>> 409ca80234b4adefb0d1b7460586fceefae5cf2a
                                 <span class="">{{$category->name}}</span>
                             </li>
                         </a>

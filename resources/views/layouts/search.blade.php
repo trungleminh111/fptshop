@@ -2,7 +2,7 @@
 <div class="productPhone container" style="margin: 16px auto;">
     <div class="row">
         <div class="col-12 pPhoneHeader">
-            <h3 class="pPhone-title">Kết Quả Tìm Kiếm</h3>
+            <h3 class="pPhone-title km-title">Kết Quả Tìm Kiếm</h3>
             <!-- <a href="" class="pPhoneAll">Xem Tất Cả</a> -->
         </div>
         <div class="col-12 d-flex">
@@ -21,9 +21,17 @@
                             <span class="pPhone-priceProduct km-priceProduct"> Giá {{number_format($product->price)}} đ</span>
 
                         </div>
-                        <div class="" style="display: flex; justify-content: center;">
-                            <button class="pPhone-btn km-btn">Add to Card</button>
-                        </div>
+                        @guest
+                        @if (Route::has('login'))
+                            <div class="" style="display: flex; justify-content: center;">
+                                <button class="km-btn" onclick="checkLogin()">Add to Cart</button>
+                            </div>
+                        @endif
+                        @else
+                            <div class="" style="display: flex; justify-content: center;">
+                                <a href="../cart/{{ $category->id }}"><button class="km-btn">Add to Cart</button></a>
+                            </div>
+                        @endguest
                     </div>
                 </div>
                 @endforeach

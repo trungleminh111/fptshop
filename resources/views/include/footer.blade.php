@@ -90,6 +90,7 @@
     </div>
 
 </footer>
+<<<<<<< HEAD
 <script type="text/javascript">
     $(document).ready(function () {
 
@@ -115,9 +116,13 @@
         });
     })
 </script>
+=======
+<div class="loader-box">
+    <span class="loader"></span>
+</div>
+>>>>>>> 409ca80234b4adefb0d1b7460586fceefae5cf2a
 @if (Session::has('authsuccess'))
 <script>
-
     Swal.fire({
         icon: 'success',
         text: "{{Session::get('authsuccess')}}",

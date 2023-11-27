@@ -30,6 +30,7 @@
                     @endif
                     @endforeach
 
+<<<<<<< HEAD
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
                         data-bs-slide="prev">
                         <span class="btn-control carousel-control-prev" aria-hidden="true"><i
@@ -40,6 +41,14 @@
                         data-bs-slide="next">
                         <span class="btn-control carousel-control-next" aria-hidden="true"><i
                                 class="fa-solid fa-circle-chevron-right fa-2xl" style="color: #ff0000;"></i></span>
+=======
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                        <span class="btn-control carousel-control-prev" aria-hidden="true"><i class="fa-solid fa-circle-chevron-left fa-2xl" style="color: #ff0000;"></i></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                        <span class="btn-control carousel-control-next" aria-hidden="true"><i class="fa-solid fa-circle-chevron-right fa-2xl" style="color: #ff0000;"></i></span>
+>>>>>>> 409ca80234b4adefb0d1b7460586fceefae5cf2a
                         <span class="visually-hidden">Next</span>
                     </button>
                 </div>
@@ -53,9 +62,13 @@
                     @php
                     $index++;
                     @endphp
+<<<<<<< HEAD
                     <span data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{$data}}"
                         class="banner-content @if ($index == 1) {{ 'active' }} @endif" aria-current="true"
                         aria-label="Slide 1"><b>{{$banner->name}}</b></span>
+=======
+                    <span data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{$data}}" class="banner-content @if ($index == 1) {{ 'active' }} @endif" aria-current="true" aria-label="Slide 1"><b>{{$banner->name}}</b></span>
+>>>>>>> 409ca80234b4adefb0d1b7460586fceefae5cf2a
                     @php
                     $data++;
                     @endphp
@@ -114,9 +127,23 @@
 
                             <span class="km-priceProductOld"> Giá Gốc 40.000.000 đ</span>
                         </div>
+<<<<<<< HEAD
                         <div class="" style="display: flex; justify-content: center;">
                             <button class="km-btn">Add to Card</button>
                         </div>
+=======
+                        @guest
+                        @if (Route::has('login'))
+                            <div class="" style="display: flex; justify-content: center;">
+                                <button class="km-btn" onclick="checkLogin()">Add to Cart</button>
+                            </div>
+                        @endif
+                        @else
+                            <div class="" style="display: flex; justify-content: center;">
+                                <button class="km-btn">Add to Cart</button>
+                            </div>
+                        @endguest
+>>>>>>> 409ca80234b4adefb0d1b7460586fceefae5cf2a
                     </div>
                 </div>
                 @endif
@@ -141,13 +168,25 @@
 <div class="productPhone container" style="margin: 16px auto;">
     <div class="row">
         <div class="col-12 pPhoneHeader">
+<<<<<<< HEAD
             <h3 class="pPhone-title">{{$category->name}}</h3>
+=======
+            <h3 class="pPhone-title km-title">{{$category->name}}</h3>
+>>>>>>> 409ca80234b4adefb0d1b7460586fceefae5cf2a
             <a href="../category/{{$category->id}}" class="pPhoneAll">Xem Tất Cả</a>
         </div>
         <div class="col-12 d-flex">
             <div class="row">
+<<<<<<< HEAD
                 @foreach($products as $product)
                 @if ($product->category_id == $category->id)
+=======
+                @php 
+                    $pMax = 0;
+                @endphp
+                @foreach($products as $product)
+                @if ($product->category_id == $category->id && $pMax < 8)
+>>>>>>> 409ca80234b4adefb0d1b7460586fceefae5cf2a
                 <div class="col-md-3 pPhone-item">
                     <div class="pPhone-image">
                         <a href="">
@@ -158,6 +197,7 @@
                     <div class="pPhone-content">
                         <a href="" class="pPhone-nameProduct km-nameProduct">{{$product->name}}</a>
                         <div class="pPhone-price km-price">
+<<<<<<< HEAD
                             <span class="pPhone-priceProduct km-priceProduct"> Giá {{number_format($product->price)}}
                                 đ</span>
 
@@ -173,6 +213,27 @@
                         </form>
                     </div>
                 </div>
+=======
+                            <span class="pPhone-priceProduct km-priceProduct"> Giá {{number_format($product->price)}} đ</span>
+
+                        </div>
+                        @guest
+                        @if (Route::has('login'))
+                            <div class="" style="display: flex; justify-content: center;">
+                                <button class="km-btn" onclick="checkLogin()">Add to Cart</button>
+                            </div>
+                        @endif
+                        @else
+                            <div class="" style="display: flex; justify-content: center;">
+                                <a href="../cart/{{ $category->id }}"><button class="km-btn">Add to Cart</button></a>
+                            </div>
+                        @endguest
+                    </div>
+                </div>
+                @php 
+                    $pMax++;
+                @endphp
+>>>>>>> 409ca80234b4adefb0d1b7460586fceefae5cf2a
                 @endif
                 @endforeach
             </div>
