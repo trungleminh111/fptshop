@@ -26,7 +26,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = "/";
+    protected $redirectTo = "/home";
     protected function registered($request, $user)
     {
         return redirect($this->redirectTo)->with('authsuccess', 'Đăng nhập thành công');

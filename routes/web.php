@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 */
 
 
-Route::get('/', [App\Http\Controllers\HomePublicController::class, 'index'])->middleware('verified');
+Route::get('/', [App\Http\Controllers\HomePublicController::class, 'index']);
 Route::get('/category/{id}', [App\Http\Controllers\HomePublicController::class, 'category']);
 Route::get('/search', [App\Http\Controllers\HomePublicController::class, 'search'])->name('search');
 Route::get('/cart', [App\Http\Controllers\HomePublicController::class, 'cart'])->name('cart');
@@ -33,7 +33,7 @@ Auth::routes(['verify' => true]);
  
 //     return redirect('/home');
 // })->middleware(['auth', 'signed'])->name('verification.verify');
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');
 Route::post('/add-to-cart', [App\Http\Controllers\CartController::class, 'addtocart'])->name('addtocart');
 Route::post('/update-cart', [App\Http\Controllers\CartController::class, 'updatecart'])->name('update_cart');
 Route::post('/delete-cart', [App\Http\Controllers\CartController::class, 'deletecart'])->name('delete_cart');
