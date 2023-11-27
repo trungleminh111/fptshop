@@ -49,6 +49,7 @@ class CartController extends Controller
         $quantity = $request->quantity;
         $cart = Cart::find($cartId);
         if (!$cart) {
+            //nut test demo o chan footer kiem tra db
             // sử dụng ajax (ajax demo ở footer.blade.php)
             session()->flash('error', 'Cart not found');
         }
