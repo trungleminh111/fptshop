@@ -15,11 +15,11 @@ class CartController extends Controller
     }
     public function index()
     {
-        return view('cart');
+        return view('layouts.cart');
     }
+
     public function addtocart(Request $request)
     {
-
         $productId = $request->id;
         $quantity = $request->quantity;
         $cartEntry = Cart::where('user_id', Auth::user()->id)
@@ -74,6 +74,34 @@ class CartController extends Controller
         $cart->delete();
         // sử dụng ajax
         session()->flash('success', 'Delete successfully');
-
+        return redirect()->back();
+    }
+    public function reduce(Request $request)
+    {
+        $productId = $request->id;
+        $quantity = $request->quantity;
+        $cart = Cart::where('user_id', Auth::user()->id)
+        ->where('product_id', $productId)
+        ->first();
+        if (isset($cart) || $quantity >= 1) {
+            $cart->update([
+                'quantity' => $cart->quantity - $quantity
+            ]);
+        }
+        return redirect()->back();
+    }
+    public function increase(Request $request)
+    {
+        $productId = $request->id;
+        $quantity = $request->quantity;
+        $cart = Cart::where('user_id', Auth::user()->id)
+        ->where('product_id', $productId)
+        ->first();
+        if (isset($cart)) {
+            $cart->update([
+                'quantity' => $cart->quantity + $quantity
+            ]);
+        }
+        return redirect()->back();
     }
 }

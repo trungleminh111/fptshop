@@ -5,8 +5,11 @@
 }
 
 body {
+    background-image: url(../images/background.webp);
+    background-color: rgb(178, 5, 0);
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
+    height: 0;
 }
 /* Top Header */
 

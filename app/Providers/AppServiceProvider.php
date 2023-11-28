@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         view()->composer('*', function ($view) {
-            $view->with('categorys', Category::all()->sortBy('name'));
+            $view->with('categorys', Category::all());
             $view->with('products', Product::all());
             $view->with('banners', Banner::all());
             $view->with('users', User::all());
@@ -34,6 +34,11 @@ class AppServiceProvider extends ServiceProvider
                 $view->with('countcart', 0);
             } else {
                 $view->with('countcart', Cart::where('user_id', Auth::user()->id)->count());
+            }
+            if (!Auth::user()) {
+                
+            } else {
+                $view->with('carts', Cart::all()->where('user_id', Auth::user()->id));
             }
         });
     }

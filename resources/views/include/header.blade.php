@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <link rel="stylesheet" href="{{asset('css/login.css')}}">
+    <link rel="stylesheet" href="{{asset('css/cart.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="{{asset('OwlCarousel/dist/assets/owl.carousel.min.css')}}">
     <link rel="stylesheet" href="{{asset('OwlCarousel/dist/assets/owl.theme.default.min.css')}}">
@@ -18,10 +19,7 @@
 </head>
 
 
-<body
-    style="background-image: url(&quot;https://images.fpt.shop/unsafe/fit-in/filters:quality(95):fill(transparent)/fptshop.com.vn/Uploads/Originals/2023/11/20/638361139780215625_desk-header-bg.png&quot;); background-color: rgb(178, 5, 0);">
-
-
+<body>
     <header class="ht-header">
         <div class="topHeader">
             <div class="container h-100">
@@ -43,7 +41,7 @@
                         </a>
                     </div>
                     <div class="col-md">
-                        <a href="" class="link-topheader cart">
+                        <a href="/cart" class="link-topheader cart">
                             <span><i class="fa-solid fa-cart-shopping"></i> {{$countcart}}</span>
                             <span>Giỏ Hàng</span>
                         </a>
@@ -84,8 +82,7 @@
                             <li class="botHeader-menuCategory--li col-md h-100">
                                 <img src="../uploads/{{$category->image}}" alt="" class="category-image h-100"
                                     style="filter: invert(1);">
-
-                             
+                                <span>{{$category->name}}</span>
                             </li>
                         </a>
                         @endforeach
