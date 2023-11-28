@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\OrderController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -26,3 +27,5 @@ Route::post('/reduce-quantity', [App\Http\Controllers\CartController::class, 're
 Route::post('/increase-quantity', [App\Http\Controllers\CartController::class, 'increase'])->name('increase');
 Route::post('/update-cart', [App\Http\Controllers\CartController::class, 'updatecart'])->name('update_cart');
 Route::post('/delete-cart', [App\Http\Controllers\CartController::class, 'deletecart'])->name('delete_cart');
+Route::post('/check-out',[OrderController::class,'check'])->name('checkout');
+Route::get('/thank-you',[OrderController::class,'thankyou'])->name('thankyou');

@@ -39,6 +39,7 @@ class AppServiceProvider extends ServiceProvider
                 
             } else {
                 $view->with('carts', Cart::all()->where('user_id', Auth::user()->id));
+                $view->with('auths', Auth::user());
             }
         });
     }
