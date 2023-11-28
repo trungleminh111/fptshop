@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\User;
 use App\Models\VnPay;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -36,14 +37,21 @@ class OrderController extends Controller
             ]
         );
 
-        if ($data['payment'] == 'ttol' && $data['total']) {
-            $this->vnpay_payment($data['total']);
-        }
-        if ($data['payment'] == 'tttt' && $data['total'] && $data['address'] && $data['user_id']) {
-            $this->payment_delivery($data['user_id'], $data['address']);
-            return redirect()->back()->with('success', 'Bạn đã đặt hàng vui lòng kiểm tra email');
 
+        $userCheckverify = User::find($data['user_id']);
+        if (!$userCheckverify->email_verified_at) {
+            return redirect('/email/verify')->with('error','Vui lòng xác thực email');
+        }else{
+            if ($data['payment'] == 'ttol' && $data['total']) {
+                $this->vnpay_payment($data['total']);
+            }
+            if ($data['payment'] == 'tttt' && $data['total'] && $data['address'] && $data['user_id']) {
+                $this->payment_delivery($data['user_id'], $data['address']);
+                return redirect()->back()->with('success', 'Bạn đã đặt hàng vui lòng kiểm tra email');
+    
+            }
         }
+
 
     }
 
