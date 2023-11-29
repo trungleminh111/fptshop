@@ -186,7 +186,7 @@ class OrderController extends Controller
             ]);
         }
         $vnpay = new VnPay();
-        $vnpay->vnp_Amount = $_GET['vnp_Amount'];
+        $vnpay->vnp_Amount = $_GET['vnp_Amount']/100;
         $vnpay->vnp_BankCode = $_GET['vnp_BankCode'];
         $vnpay->vnp_CardType = $_GET['vnp_CardType'];
         $vnpay->vnp_OrderInfo = $_GET['vnp_OrderInfo'];
