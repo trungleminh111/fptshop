@@ -83,10 +83,12 @@ class CartController extends Controller
         $cart = Cart::where('user_id', Auth::user()->id)
         ->where('product_id', $productId)
         ->first();
-        if (isset($cart) || $quantity >= 1) {
+        if (isset($cart) && $quantity > 1) {
             $cart->update([
-                'quantity' => $cart->quantity - $quantity
+                'quantity' => $cart->quantity - 1
             ]);
+        }else {
+            $cart->delete();
         }
         return redirect()->back();
     }

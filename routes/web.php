@@ -19,13 +19,20 @@ use Illuminate\Http\Request;
 Route::get('/', [App\Http\Controllers\HomePublicController::class, 'index']);
 Route::get('/category/{id}', [App\Http\Controllers\HomePublicController::class, 'category']);
 Route::get('/search', [App\Http\Controllers\HomePublicController::class, 'search'])->name('search');
+
 Auth::routes(['verify' => true]);
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');
+
 Route::get('/cart', [App\Http\Controllers\CartController::class, 'index']);
 Route::post('/add-to-cart', [App\Http\Controllers\CartController::class, 'addtocart'])->name('addtocart');
 Route::post('/reduce-quantity', [App\Http\Controllers\CartController::class, 'reduce'])->name('reduce');
 Route::post('/increase-quantity', [App\Http\Controllers\CartController::class, 'increase'])->name('increase');
 Route::post('/update-cart', [App\Http\Controllers\CartController::class, 'updatecart'])->name('update_cart');
 Route::post('/delete-cart', [App\Http\Controllers\CartController::class, 'deletecart'])->name('delete_cart');
+
 Route::post('/check-out',[OrderController::class,'check'])->name('checkout');
 Route::get('/thank-you',[OrderController::class,'thankyou'])->name('thankyou');
+
+Route::get('/profile', [App\Http\Controllers\UserController::class, 'profile']);
+Route::post('/up-info-profile', [App\Http\Controllers\UserController::class, 'upInfoProfile'])->name('upinfoprofile');

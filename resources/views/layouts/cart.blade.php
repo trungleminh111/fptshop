@@ -2,7 +2,11 @@
 
 <div class="cart-page container">
     <div class="col-md-12 cart-title">
-        <h1 class="cart-title--h1">Giỏ hàng của bạn có {{$countcart}} sản phẩm !</h1>
+        @if($countcart < 1)
+            <h1 class="cart-title--h1">Bạn chưa thêm sản phẩm nào!</h1>
+        @else
+            <h1 class="cart-title--h1">Giỏ hàng của bạn có {{$countcart}} sản phẩm !</h1>
+        @endif
     </div>
     <div class="row">
         <div class="col-md-8 cart-list">
@@ -30,7 +34,7 @@
                             <!-- Giảm Số Lượng Sản Phẩm -->
                             <form action="{{ route('reduce') }}" method="post">
                                 @csrf
-                                <input type="hidden" name="quantity" value="1">
+                                <input type="hidden" name="quantity" value="{{$cart->quantity}}">
                                 <input type="hidden" name="id" value="{{$product->id}}">
                                 <button class="btn-cart btn-reduce">-</button>
                             </form>
@@ -67,11 +71,6 @@
                     @endforeach
                 </tbody>
             </table>
-            @if($countcart == 0)
-            <tr>
-                <h1 class="cart-title--h1">Bạn chưa thêm sản phẩm nào</h1>
-            </tr>
-            @endif
         </div>
         <div class="col-md-4 cart-checkout">
             <h1 class="text-center mb-5">Thanh Toán</h1>
@@ -122,8 +121,7 @@
                     </div>
                     <div class="col-md-6 d-flex align-item-center">
                         <input type="radio" name="payment" value="ttol" id="ttol">
-                        <label for="ttol" class="cart-checkbox"><img src="{{'../images/vnpay.svg'}}" alt=""
-                                style="width:100%;"></label>
+                        <label for="ttol" class="cart-checkbox"><img src="{{'../images/vnpay.svg'}}" alt="" style="width:100%;"></label>
                     </div>
                     <div class="col-md-6 d-flex align-item-center">
                         <input type="radio" name="payment" value="tttt" id="tttt">
@@ -152,8 +150,7 @@
                     <label for="phone" class="cart-infouser--text">Số điện thoại</label>
                     <input type="text" name="phone" value="{{$auths->phone}}" id="phone" class="form-control" required>
                     <label for="address" class="cart-infouser--text">Địa chỉ</label>
-                    <input type="text" name="address" value="{{$auths->address}}" id="address" class="form-control"
-                        required>
+                    <input type="text" name="address" value="{{$auths->address}}" id="address" class="form-control" required>
                     @else
                     <label for="name" class="cart-infouser--text">Tên người nhận</label>
                     <input type="text" name="name" value="" id="name" class="form-control" required>

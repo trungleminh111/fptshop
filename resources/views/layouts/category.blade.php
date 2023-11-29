@@ -23,17 +23,14 @@
                             <span class="pPhone-priceProduct km-priceProduct"> Giá {{number_format($product->price)}} đ</span>
 
                         </div>
-                        @guest
-                        @if (Route::has('login'))
+                        <form action="{{ route('addtocart') }}" method="post">
                             <div class="" style="display: flex; justify-content: center;">
-                                <button class="km-btn" onclick="checkLogin()">Add to Cart</button>
+                                @csrf
+                                <input type="hidden" name="quantity" value="1">
+                                <input type="hidden" name="id" value="{{$product->id}}">
+                                <button type="submit" class="pPhone-btn km-btn">Add to Card</button>
                             </div>
-                        @endif
-                        @else
-                            <div class="" style="display: flex; justify-content: center;">
-                                <a href="../cart/{{ $category->id }}"><button class="km-btn">Add to Cart</button></a>
-                            </div>
-                        @endguest
+                        </form>
                     </div>
                 </div>
                 @endif

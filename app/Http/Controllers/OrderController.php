@@ -211,7 +211,7 @@ class OrderController extends Controller
         ];
         $this->sendMail($data, $user);
 
-        return redirect('/cart')->with('success', 'Bạn đã mua đặt hàng vui lòng kiểm tra email');
+        return redirect('/cart')->with('success', 'Bạn đã đặt hàng vui lòng kiểm tra email');
     }
 
     public function sendMail($data, $user)
