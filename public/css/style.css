@@ -244,35 +244,25 @@ body {
     border: 1px solid #ccc;
 }
 .km-hot .item:hover .km-img{
-    scale: 1.05;    
+    scale: 0.9;    
 }
 
 .km-img {
     transition: scale 0.5s;
+    scale: 0.7;
 }
 
 .km-image {
     position: relative;
+    overflow: hidden;
 }
 
-.km-tag {
+.km-borders{
     position: absolute;
-    bottom: 20px;
-    padding: 0px 10px;
-    color: #FFFFFF;
-    background-color: #cd1818;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-}
-
-.km-tagSale {
-    position: absolute;
+    height: 100%;
+    width: 100%;
     top: 0;
-    padding: 0px 10px;
-    color: #FFFFFF;
-    background-color: #cd1818;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
+    left: 0;
 }
 
 .km-content {
@@ -295,7 +285,6 @@ body {
 
 
 .km-price {
-    margin: 30px 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -317,7 +306,7 @@ body {
 
 .km-btn {
     width: fit-content;
-    height: 50px;
+    height: 40px;
     border-radius: 10px;
     border: 1px solid #000000;
     color: #000000;
@@ -325,12 +314,33 @@ body {
     font-size: 15px;
     font-weight: 700;
     padding: 0 10px;
+    margin: 10px 0;
     transition: background-color 0.5s;
 }
 
 .km-btn:hover {
     background-color: #cd1818;
     color: #FFFFFF;
+}
+
+.payment {
+    margin: 10px 0;
+    background: #f3f3f3;
+    display: flex;
+    border-radius: 20px;
+    height: 110px;
+    justify-content: space-evenly;
+    height: fit-content;
+}
+
+
+#payment-kredivo,
+#payment-zalo,
+#payment-vn {
+    border-radius: 100px;
+    height: 50px;
+    width: 50px !important;
+    cursor: pointer;
 }
 
 /* End Khuyến Mãi Hot */
@@ -344,6 +354,7 @@ body {
 }
 
 .pPhone-item {
+    width: 300px;
     padding: 10px;
     background-color: #FFFFFF;
     display: flex;
@@ -364,7 +375,7 @@ body {
     outline: solid 2px #cd1818;
 }
 .pPhone-item:hover .pPhone-img {
-    scale: 1.05;
+    scale: 0.9;
 }
 
 .pPhone-image {
@@ -379,6 +390,12 @@ body {
     width: 250px;
     height: 300px;
     transition: scale 1s;
+    scale: 0.7;
+}
+
+.star-icon{
+    color: #ea9d02;
+    font-size: 16px;
 }
 
 .pPhone-tagHot {
