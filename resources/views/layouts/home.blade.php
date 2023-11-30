@@ -100,14 +100,14 @@
                     @if($product->status == 1)
                     <div class="item">
                         <div class="km-image">
-                            <a href="">
+                            <a href="../product/{{ $product->id }}">
                                 <img src="../uploads/{{$product->image}}" alt="" class="km-img">
                             </a>
                             <span class="km-tagSale">SALE</span>
                             <span class="km-tag">Giảm ngay 1 triệu !</span>
                         </div>
                         <div class="km-content">
-                            <a href="" class="km-nameProduct">{{$product->name}}</a>
+                            <a href="../product/{{ $product->id }}" class="km-nameProduct">{{$product->name}}</a>
                             <div class="km-price">
                                 <span class="km-priceProduct"> Giá Sale {{number_format($product->price)}} đ</span>
                                 <span class="km-priceProductOld"> Giá Gốc 40.000.000 đ</span>
@@ -155,13 +155,13 @@
                         @if ($product->category_id == $category->id && $maxP <= 8)
                             <div class="col-md-3 pPhone-item">
                                 <div class="pPhone-image">
-                                    <a href="">
+                                    <a href="../product/{{ $product->id }}">
                                         <img src="../uploads/{{$product->image}}" alt="" class="pPhone-img">
                                     </a>
                                     <span class="pPhone-tagHot">HOT</span>
                                 </div>
                                 <div class="pPhone-content">
-                                    <a href="" class="pPhone-nameProduct km-nameProduct">{{$product->name}}</a>
+                                    <a href="../product/{{ $product->id }}" class="pPhone-nameProduct km-nameProduct">{{$product->name}}</a>
                                     <div class="pPhone-price km-price">
                                         <span class="pPhone-priceProduct km-priceProduct"> Giá {{number_format($product->price)}}
                                             đ</span>

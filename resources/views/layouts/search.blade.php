@@ -10,28 +10,25 @@
                 @foreach($productss as $product)
                 <div class="col-md-3 pPhone-item">
                     <div class="pPhone-image">
-                        <a href="">
+                        <a href="../product/{{ $product->id }}">
                             <img src="../uploads/{{$product->image}}" alt="" class="pPhone-img">
                         </a>
                         <span class="pPhone-tagHot">HOT</span>
                     </div>
                     <div class="pPhone-content">
-                        <a href="" class="pPhone-nameProduct km-nameProduct">{{$product->name}}</a>
+                        <a href="../product/{{ $product->id }}" class="pPhone-nameProduct km-nameProduct">{{$product->name}}</a>
                         <div class="pPhone-price km-price">
                             <span class="pPhone-priceProduct km-priceProduct"> Giá {{number_format($product->price)}} đ</span>
 
                         </div>
-                        @guest
-                        @if (Route::has('login'))
+                        <form action="{{route('addtocart')}}" method="post">
                             <div class="" style="display: flex; justify-content: center;">
-                                <button class="km-btn" onclick="checkLogin()">Add to Cart</button>
+                                @csrf
+                                <input type="hidden" name="quantity" value="1">
+                                <input type="hidden" name="id" value="{{$product->id}}">
+                                <button type="submit" class="km-btn">Add to Card</button>
                             </div>
-                        @endif
-                        @else
-                            <div class="" style="display: flex; justify-content: center;">
-                                <a href="../cart/{{ $category->id }}"><button class="km-btn">Add to Cart</button></a>
-                            </div>
-                        @endguest
+                        </form>
                     </div>
                 </div>
                 @endforeach

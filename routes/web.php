@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 
 Route::get('/', [App\Http\Controllers\HomePublicController::class, 'index']);
 Route::get('/category/{id}', [App\Http\Controllers\HomePublicController::class, 'category']);
+Route::get('/product/{id}', [App\Http\Controllers\HomePublicController::class, 'product']);
 Route::get('/search', [App\Http\Controllers\HomePublicController::class, 'search'])->name('search');
 
 Auth::routes(['verify' => true]);
@@ -35,4 +36,5 @@ Route::post('/check-out',[OrderController::class,'check'])->name('checkout');
 Route::get('/thank-you',[OrderController::class,'thankyou'])->name('thankyou');
 
 Route::get('/profile', [App\Http\Controllers\UserController::class, 'profile']);
-Route::post('/up-info-profile', [App\Http\Controllers\UserController::class, 'upInfoProfile'])->name('upinfoprofile');
+Route::post('/up-info-profile', [App\Http\Controllers\UserController::class, 'upInfoProfile'])->name('upinfo');
+Route::post('/up-pass-profile', [App\Http\Controllers\UserController::class, 'upPassProfile'])->name('uppassword');

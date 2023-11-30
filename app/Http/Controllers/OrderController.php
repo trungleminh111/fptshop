@@ -48,7 +48,6 @@ class OrderController extends Controller
             if ($data['payment'] == 'tttt' && $data['total'] && $data['address'] && $data['user_id']) {
                 $this->payment_delivery($data['user_id'], $data['address']);
                 return redirect()->back()->with('success', 'Bạn đã đặt hàng vui lòng kiểm tra email');
-    
             }
         }
 

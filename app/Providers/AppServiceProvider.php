@@ -31,7 +31,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('categorys', Category::all());
             $view->with('products', Product::all());
             $view->with('banners', Banner::all());
-            // $view->with('users', User::all());
+            $view->with('users', User::all());
             $view->with('orderdetails', OrderDetail::all());
             $view->with('orders', Order::all());
             if (!Auth::user()) {

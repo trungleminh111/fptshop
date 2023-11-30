@@ -162,7 +162,6 @@
 @endif
 @if (Session::has('authloginsuccess'))
 <script>
-
     Swal.fire({
         icon: 'success',
         text: "{{Session::get('authloginsuccess')}}",
@@ -174,6 +173,7 @@
 
 <script src="{{asset('js/main.js')}}"></script>
 <script src="{{asset('OwlCarousel/dist/owl.carousel.min.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

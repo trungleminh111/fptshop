@@ -30,16 +30,12 @@
                     </div>
                     @endif
                     @endforeach
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                        data-bs-slide="prev">
-                        <span class="btn-control carousel-control-prev" aria-hidden="true"><i
-                                class="fa-solid fa-circle-chevron-left fa-2xl" style="color: #ff0000;"></i></span>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                        <span class="btn-control carousel-control-prev" aria-hidden="true"><i class="fa-solid fa-circle-chevron-left fa-2xl" style="color: #ff0000;"></i></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                        data-bs-slide="next">
-                        <span class="btn-control carousel-control-next" aria-hidden="true"><i
-                                class="fa-solid fa-circle-chevron-right fa-2xl" style="color: #ff0000;"></i></span>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                        <span class="btn-control carousel-control-next" aria-hidden="true"><i class="fa-solid fa-circle-chevron-right fa-2xl" style="color: #ff0000;"></i></span>
                         <span class="visually-hidden">Next</span>
                     </button>
                 </div>
@@ -53,9 +49,7 @@
                     @php
                     $index++;
                     @endphp
-                    <span data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{$data}}"
-                        class="banner-content @if ($index == 1) {{ 'active' }} @endif" aria-current="true"
-                        aria-label="Slide 1"><b>{{$banner->name}}</b></span>
+                    <span data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{$data}}" class="banner-content @if ($index == 1) {{ 'active' }} @endif" aria-current="true" aria-label="Slide 1"><b>{{$banner->name}}</b></span>
                     @php
                     $data++;
                     @endphp

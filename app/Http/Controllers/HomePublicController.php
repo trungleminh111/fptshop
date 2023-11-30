@@ -18,6 +18,11 @@ class HomePublicController extends Controller
         $category = Category::find($id);
         return view('layouts.category', compact('category'));
     }
+    
+    public function product($id) {
+        $product = Product::find($id);
+        return view('layouts.productdetail', compact('product'));
+    }
 
     public function search(Request $request)
     {

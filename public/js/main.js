@@ -53,8 +53,3 @@ window.addEventListener("load", () => {
     })
 })
 
-// Check Login
-
-function checkLogin() {
-    alert('Bạn Chưa Đăng Nhập')
-}
