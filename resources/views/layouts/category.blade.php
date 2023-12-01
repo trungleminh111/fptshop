@@ -14,8 +14,8 @@
                     <div class="pPhone-image">
                         <a href="../product/{{ $product->id }}">
                             <img src="../uploads/{{$product->image}}" alt="" class="pPhone-img">
+                            <img src="{{asset('../images/khung.webp')}}" alt="" class="km-borders">
                         </a>
-                        <img src="{{asset('../images/khung.webp')}}" alt="" class="km-borders">
                     </div>
                     <div class="pPhone-content">
                         <a href="../product/{{ $product->id }}" class="pPhone-nameProduct km-nameProduct">{{$product->name}}</a>

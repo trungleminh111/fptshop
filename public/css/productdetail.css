@@ -1,0 +1,126 @@
+.productDetail {
+    background: #fff;
+    padding: 50px 0;
+    border-bottom: 1px solid #cb1c22;
+}
+
+.pd-header {
+    border-bottom: 1px solid #ccc;
+    margin: 30px 0 50px 0;
+}
+
+.pd-image--img {
+    height: 500px;
+    width: 100%;
+    scale: 0.8;
+}
+.pd-image {
+    height: 500px;
+}
+
+.pd-image>a {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.pd-pricesale {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    font-size: 36px;
+    font-weight: 600;
+    color: #FFF;
+}
+
+.pd-configuration {
+    background: #ccc;
+    margin: 20px 0;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.pd-configuration>ul {
+    list-style-type: none;
+    margin: 0;
+}
+.pd-configuration>ul>li {
+    color: #000;
+    font-weight: 600;
+    font-size: 17px;
+}
+
+.pd-price--text {
+    font-weight: 500;
+    font-size: 32px;
+    color: #cb1c22;
+}
+
+.pd-capacity {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pd-capacity>a {
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #ccc;
+    border-radius: 20px;
+    font-size: 20px;
+    color: #000;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+
+.pd-color-item {
+    width: fit-content;
+    text-align: center;
+}
+
+.pdcolor-img {
+    width: 100px;
+    position: relative;
+}
+
+.pd-color-item:hover .pd-icon--check {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.pd-icon--check {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    opacity: 0;
+    color: #FFF;
+    border: 1px solid red;
+    font-size: 25px;
+}
+
+.pdcolor-text {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.pd-oder>a>button {
+    width: 100%;
+    height: 50px;
+    border-radius: 10px;
+    margin: 20px 0;
+    background: #cb1c22;
+    color: #FFF;
+    font-weight: 700;
+    font-size: 20px;
+    border: none;
+}
