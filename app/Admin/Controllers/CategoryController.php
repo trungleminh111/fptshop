@@ -32,7 +32,10 @@ class CategoryController extends AdminController
         $grid->column('image', __('Image'))->display(function ($image) {
             return '<img src="../uploads/'.$image.'" style ="width: 40px; height: 40px">';
         });
-        $grid->column('status', __('Status'));
+        $grid->column('status', __('Status'))->switch([
+            'on' => ['value' => 0, 'text' => 'Hiện', 'color' => 'success'],
+            'off' => ['value' => 1, 'text' => 'Ẩn', 'color' => 'danger'],
+        ]);
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
 

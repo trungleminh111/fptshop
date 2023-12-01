@@ -27,12 +27,13 @@ class OrderDetailController extends AdminController
         $grid = new Grid(new OrderDetail());
 
         $grid->column('id', __('Id'));
-        $grid->column('order_id', __('Order id'));
-        $grid->column('product_id', __('Product id'));
+        $grid->column('order.code', __('Code order'));
+        $grid->column('product.name', __('Product'));
         $grid->column('price', __('Price'));
         $grid->column('quantity', __('Quantity'));
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
+        
 
         return $grid;
     }

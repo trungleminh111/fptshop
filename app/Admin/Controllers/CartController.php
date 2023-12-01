@@ -27,8 +27,8 @@ class CartController extends AdminController
         $grid = new Grid(new Cart());
 
         $grid->column('id', __('Id'));
-        $grid->column('user_id', __('User id'));
-        $grid->column('product_id', __('Product id'));
+        $grid->column('user.name', __('User'));
+        $grid->column('product.name', __('Product id'));
         $grid->column('quantity', __('Quantity'));
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));

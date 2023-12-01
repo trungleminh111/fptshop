@@ -36,8 +36,11 @@ class ProductController extends AdminController
         $grid->column('price', __('Price'));
         $grid->column('quantity', __('Quantity'));
         $grid->column('description', __('Description'));
-        $grid->column('status', __('Status'));
-        $grid->column('category_id', __('Category id'));
+        $grid->column('status', __('Status'))->switch([
+            'on' => ['value' => 0, 'text' => 'Hiện', 'color' => 'success'],
+            'off' => ['value' => 1, 'text' => 'Ẩn', 'color' => 'danger'],
+        ]);
+        $grid->column('category.name', __('Category'));
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
 
@@ -61,7 +64,7 @@ class ProductController extends AdminController
         $show->field('quantity', __('Quantity'));
         $show->field('description', __('Description'));
         $show->field('status', __('Status'));
-        $show->field('category_id', __('Category id'));
+        $show->field('category.name', __('Category id'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
 
