@@ -2,8 +2,11 @@
 
 namespace App\Admin\Controllers;
 
+use App\Models\Color;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\ProductVariant;
+use App\Models\Size;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -65,6 +68,21 @@ class ProductController extends AdminController
         $show->field('description', __('Description'));
         $show->field('status', __('Status'));
         $show->field('category.name', __('Category id'));
+        $show->panel('Product Variants', function ($panel) use ($id) {
+            $variants = ProductVariantt::where('product_id', $id)->get();
+            $panel->table('Product Variants', function ($table) use ($variants) {
+                $table->column('id', __('ID'));
+                $table->column('size.name', __('Size'));
+                $table->column('color.name', __('Color'));
+                $table->column('price', __('Price'))->display(function ($price) {
+                    return number_format($price);
+                });
+                $table->column('quantity', __('Quantity'));
+                $table->column('created_at', __('Created at'));
+                $table->column('updated_at', __('Updated at'));
+
+            });
+        });
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
 
@@ -94,6 +112,16 @@ class ProductController extends AdminController
                 $arr += [$Cate->id => $Cate->name];
             }
             return $arr;
+        });
+        $form->hasMany('variants', 'Product Variants', function (Form\NestedForm $form) {
+            $form->select('size_id', 'Size')->options(function () {
+                return Size::pluck('name', 'id');
+            });
+            $form->select('color_id', 'Color')->options(function () {
+                return Color::pluck('name', 'id');
+            });
+            $form->decimal('price', 'Price');
+            $form->number('quantity', 'Quantity');
         });
 
         return $form;

@@ -102,7 +102,7 @@
                     <div class="km-content">
                         <a href="../product/{{ $product->id }}" class="km-nameProduct">{{$product->name}}</a>
                         <div class="km-price">
-                            <span class="km-priceProduct"> Giá Sale {{number_format($product->price)}} đ</span>
+                            <span class="km-priceProduct"> Giá Sale {{number_format($product->variants->min('price'))}} đ</span>
                             <span class="km-priceProductOld"> Giá Gốc 40.000.000 đ</span>
                             <div class="pRate">
                                 <i class="fa-solid fa-star star-icon"></i>

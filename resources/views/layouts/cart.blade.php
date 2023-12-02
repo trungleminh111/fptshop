@@ -2,11 +2,10 @@
 
 <div class="cart-page container">
     <div class="col-md-12 cart-title">
-        @if($countcart < 1)
-            <h1 class="cart-title--h1">Bạn chưa thêm sản phẩm nào!</h1>
-        @else
+        @if($countcart < 1) <h1 class="cart-title--h1">Bạn chưa thêm sản phẩm nào!</h1>
+            @else
             <h1 class="cart-title--h1">Giỏ hàng của bạn có {{$countcart}} sản phẩm !</h1>
-        @endif
+            @endif
     </div>
     <div class="row">
         <div class="col-md-8 cart-list">
@@ -28,7 +27,10 @@
                             <div class="d-flex align-items-center">
                                 <img src="../uploads/{{$product->image}}" alt="" class="cImg-product">
                                 <div class="cName-product">{{$product->name}}</div>
+
                             </div>
+                            <div class="cName-product">Màu</div>
+                            <div class="cName-product">size</div>
                         </td>
                         <td class="col-md-3 d-flex justify-content-center">
                             <!-- Giảm Số Lượng Sản Phẩm -->
@@ -121,7 +123,8 @@
                     </div>
                     <div class="col-md-6 d-flex align-item-center">
                         <input type="radio" name="payment" value="ttol" id="ttol">
-                        <label for="ttol" class="cart-checkbox"><img src="{{'../images/vnpay.svg'}}" alt="" style="width:100%;"></label>
+                        <label for="ttol" class="cart-checkbox"><img src="{{'../images/vnpay.svg'}}" alt=""
+                                style="width:100%;"></label>
                     </div>
                     <div class="col-md-6 d-flex align-item-center">
                         <input type="radio" name="payment" value="tttt" id="tttt">
@@ -150,7 +153,8 @@
                     <label for="phone" class="cart-infouser--text">Số điện thoại</label>
                     <input type="text" name="phone" value="{{$auths->phone}}" id="phone" class="form-control" required>
                     <label for="address" class="cart-infouser--text">Địa chỉ</label>
-                    <input type="text" name="address" value="{{$auths->address}}" id="address" class="form-control" required>
+                    <input type="text" name="address" value="{{$auths->address}}" id="address" class="form-control"
+                        required>
                     @else
                     <label for="name" class="cart-infouser--text">Tên người nhận</label>
                     <input type="text" name="name" value="" id="name" class="form-control" required>

@@ -21,5 +21,18 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class);
     }
-  
+    public function variants()
+    {
+        return $this->hasMany(ProductVariant::class);
+    }
+
+    public function sizes()
+    {
+        return Size::all();
+    }
+
+    public function colors()
+    {
+        return Color::all();
+    }
 }

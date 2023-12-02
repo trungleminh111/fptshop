@@ -19,6 +19,8 @@ use Illuminate\Http\Request;
 Route::get('/', [App\Http\Controllers\HomePublicController::class, 'index']);
 Route::get('/category/{id}', [App\Http\Controllers\HomePublicController::class, 'category']);
 Route::get('/product/{id}', [App\Http\Controllers\HomePublicController::class, 'product']);
+Route::get('/get-variant-price', [App\Http\Controllers\HomePublicController::class,'getVariantPrice'])->name('get_variant_price');
+
 Route::get('/search', [App\Http\Controllers\HomePublicController::class, 'search'])->name('search');
 
 Auth::routes(['verify' => true]);
