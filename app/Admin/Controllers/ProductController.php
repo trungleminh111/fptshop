@@ -104,7 +104,6 @@ class ProductController extends AdminController
         $form->number('quantity', __('Quantity'));
         $form->textarea('description', __('Description'));
         $form->switch('status', __('Status'));
-        // $form->number('category_id', __('Category id'));
         $form->select('category_id')->options(function(){
             $Category = Category::all();
             $arr = [];

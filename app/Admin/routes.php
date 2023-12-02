@@ -19,5 +19,8 @@ Route::group([
     $router->resource('carts', CartController::class);
     $router->resource('orders', OrderController::class);
     $router->resource('order-details', OrderDetailController::class);
+    $router->resource('colors', ColorController::class);
+    $router->resource('sizes', SizeController::class);
+    $router->resource('product-variants', ProductVariantController::class);
 
 });

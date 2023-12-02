@@ -61,7 +61,7 @@
                             <div class="pd-color-item">
                                 <label for="{{ $variant->color->id }}">
                                     <div class="pdcolor-img" id="color">
-                                        <img for="" src="../uploads/{{$product->image}}" alt=""
+                                        <img for="" src="../uploads/{{$variant->image}}" alt=""
                                             class="w-100">
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input variant-checkbox d-none" type="radio"

@@ -1,6 +1,4 @@
-@extends('layouts.app')
-@section('content')
-
+@include('include/header')
 <div class="sale-bfday">
     <div class="container">
         <div class="row">
@@ -49,7 +47,8 @@
                     @php
                     $index++;
                     @endphp
-                    <span data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{$data}}" class="banner-content @if ($index == 1) {{ 'active' }} @endif" aria-current="true" aria-label="Slide 1"><b>{{$banner->name}}</b></span>
+                    <span data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{$data}}" class="banner-content @if ($index == 1) {{ 'active' }} @endif" aria-current="true" aria-label="Slide 1"><b>{{$banner->name}}</b>
+                    </span>
                     @php
                     $data++;
                     @endphp
@@ -95,20 +94,37 @@
                 @if($product->status == 1)
                 <div class="item">
                     <div class="km-image">
-                        <a href="">
+                        <a href="../product/{{ $product->id }}">
                             <img src="../uploads/{{$product->image}}" alt="" class="km-img">
+                            <img src="{{asset('../images/khung.webp')}}" alt="" class="km-borders">
                         </a>
-                        <span class="km-tagSale">SALE</span>
-                        <span class="km-tag">Giảm ngay 1 triệu !</span>
                     </div>
                     <div class="km-content">
-                        <a href="" class="km-nameProduct">{{$product->name}}</a>
+                        <a href="../product/{{ $product->id }}" class="km-nameProduct">{{$product->name}}</a>
                         <div class="km-price">
                             <span class="km-priceProduct"> Giá Sale {{number_format($product->price)}} đ</span>
                             <span class="km-priceProductOld"> Giá Gốc 40.000.000 đ</span>
+                            <div class="pRate">
+                                <i class="fa-solid fa-star star-icon"></i>
+                                <i class="fa-solid fa-star star-icon"></i>
+                                <i class="fa-solid fa-star star-icon"></i>
+                                <i class="fa-solid fa-star star-icon"></i>
+                                <i class="fa-solid fa-star star-icon"></i>
+                                <span>96 đánh giá</span>
+                            </div>
                         </div>
-                        <div class="" style="display: flex; justify-content: center;">
-                            <button class="km-btn">Add to Card</button>
+                        <form action="{{route('addtocart')}}" method="post">
+                            <div class="" style="display: flex; justify-content: center;">
+                                @csrf
+                                <input type="hidden" name="quantity" value="1">
+                                <input type="hidden" name="id" value="{{$product->id}}">
+                                <button type="submit" class="km-btn">Add to Card</button>
+                            </div>
+                        </form>
+                        <div class="payment">
+                            <img src="{{asset('../images/paykredivo.webp')}}" id="payment-kredivo">
+                            <img src="{{asset('../images/payzalo.webp')}}" id="payment-zalo">
+                            <img src="{{asset('../images/payvn.webp')}}" id="payment-vn">
                         </div>
                     </div>
                 </div>
@@ -137,39 +153,55 @@
             <a href="../category/{{$category->id}}" class="pPhoneAll">Xem Tất Cả</a>
         </div>
         <div class="col-12 d-flex">
-            <div class="row">
+            <div class="row justify-content-around">
+                @php
+                $maxP = 1;
+                @endphp
                 @foreach($products as $product)
-                @if ($product->category_id == $category->id)
+                @if ($product->category_id == $category->id && $maxP <= 8) 
                 <div class="col-md-3 pPhone-item">
                     <div class="pPhone-image">
-                        <a href="">
+                        <a href="../product/{{ $product->id }}">
                             <img src="../uploads/{{$product->image}}" alt="" class="pPhone-img">
+                            <img src="{{asset('../images/khung.webp')}}" alt="" class="km-borders">
                         </a>
-                        <span class="pPhone-tagHot">HOT</span>
                     </div>
                     <div class="pPhone-content">
-                        <a href="" class="pPhone-nameProduct km-nameProduct">{{$product->name}}</a>
+                        <a href="../product/{{ $product->id }}" class="pPhone-nameProduct km-nameProduct">{{$product->name}}</a>
                         <div class="pPhone-price km-price">
-                            <span class="pPhone-priceProduct km-priceProduct"> Giá {{number_format($product->price)}}
-                                đ</span>
-
+                            <span class="pPhone-priceProduct km-priceProduct"> Giá {{number_format($product->price)}} đ</span>
+                            <div class="pRate">
+                                <i class="fa-solid fa-star star-icon"></i>
+                                <i class="fa-solid fa-star star-icon"></i>
+                                <i class="fa-solid fa-star star-icon"></i>
+                                <i class="fa-solid fa-star star-icon"></i>
+                                <i class="fa-solid fa-star star-icon"></i>
+                                <span>96 đánh giá</span>
+                            </div>
                         </div>
-                        <form action="{{route('addtocart')}}" method="post">
+                        <form action="{{ route('addtocart') }}" method="post">
                             <div class="" style="display: flex; justify-content: center;">
                                 @csrf
                                 <input type="hidden" name="quantity" value="1">
                                 <input type="hidden" name="id" value="{{$product->id}}">
                                 <button type="submit" class="pPhone-btn km-btn">Add to Card</button>
-
                             </div>
                         </form>
+                        <div class="payment">
+                            <img src="{{asset('../images/paykredivo.webp')}}" id="payment-kredivo">
+                            <img src="{{asset('../images/payzalo.webp')}}" id="payment-zalo">
+                            <img src="{{asset('../images/payvn.webp')}}" id="payment-vn">
+                        </div>
                     </div>
-                </div>
-                @endif
-                @endforeach
             </div>
+            @php
+            $maxP++;
+            @endphp
+            @endif
+            @endforeach
         </div>
     </div>
 </div>
+</div>
 @endforeach
-@endsection
+@include('include/footer')

@@ -45,6 +45,6 @@ class HomePublicController extends Controller
             ->where('color_id', $colorId)
             ->first();
 
-        return response()->json(['price' => $variant->price]);
+        return response()->json(['price' => number_format($variant->price)]);
     }
 }
