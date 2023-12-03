@@ -1,27 +1,39 @@
 .productDetail {
     background: #fff;
-    padding: 50px 0;
     border-bottom: 1px solid #cb1c22;
 }
 
 .pd-header {
     border-bottom: 1px solid #ccc;
-    margin: 30px 0 50px 0;
+    margin: 20px 0;
+}
+
+.pdName {
+    margin-bottom: 15px;
 }
 
 .pd-image--img {
-    height: 500px;
-    width: 100%;
     scale: 0.8;
 }
 .pd-image {
-    height: 500px;
+    height: 400px;
 }
 
 .pd-image>a {
     position: absolute;
     width: 100%;
     height: 100%;
+}
+
+.pd-price--number {
+    font-weight: 500;
+    font-size: 32px;
+    color: #cb1c22;
+}
+.pd-price--text {
+    color: #000;
+    font-size: 16px;
+    font-weight: 400;
 }
 
 .pd-pricesale {
@@ -52,28 +64,22 @@
     font-size: 17px;
 }
 
-.pd-price--text {
-    font-weight: 500;
-    font-size: 32px;
-    color: #cb1c22;
-}
 
 .pd-capacity {
     display: flex;
     justify-content: space-between;
 }
 
-.pd-capacity>a {
-    width: 48%;
+.pd-capacity>.radio {
+    width: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: #ccc;
-    border-radius: 20px;
+    background: #f1f1f1;
     font-size: 20px;
-    color: #000;
-    font-weight: 700;
-    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    border: 1px solid #ccc;
 }
 
 
@@ -84,6 +90,12 @@
 
 .pdcolor-img {
     width: 100px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-check {
     position: relative;
 }
 
@@ -102,7 +114,7 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    opacity: 0;
+    opacity: 1;
     color: #FFF;
     border: 1px solid red;
     font-size: 25px;
@@ -123,4 +135,36 @@
     font-weight: 700;
     font-size: 20px;
     border: none;
+}
+
+.pd-endow {
+    border: 1px solid #cb1c22;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    margin-bottom: 30px;
+}
+
+.pd-endow--title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    background-color: #cb1c22;
+    color: #FFF;
+    font-size: 18px;
+    font-weight: 600;
+    font-size: 25px;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+}
+
+.pd-endow>span {
+    font-size: 20px;
+    height: 50px;
+    display: flex;
+    align-items: center;
 }
