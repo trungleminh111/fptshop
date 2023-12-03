@@ -42,7 +42,7 @@ class HomePublicController extends Controller
         $colorId = $request->input('color_id');
 
         $variant = ProductVariant::where('size_id', $sizeId)
-            ->where('color_id', $colorId)
+            ->where('color_id', $colorId)->where('product_id',$request->product_id)
             ->first();
 
         return response()->json(['price' => number_format($variant->price)]);

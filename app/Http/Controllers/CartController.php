@@ -15,7 +15,7 @@ class CartController extends Controller
     }
     public function index()
     {
-        
+
         return view('layouts.cart');
     }
 
@@ -34,19 +34,34 @@ class CartController extends Controller
             return redirect()->back()->with('error', 'Product not found');
         }
         if ($cartEntry) {
-            $cartEntry->update([
-                'quantity' => $cartEntry->quantity + $quantity
-            ]);
-        } else {
-            if ($size_id && $color_id) {
+            if($size_id == $cartEntry->size_id && $color_id == $cartEntry->color_id){
+               
+                $cartEntry->update([
+                    'quantity' => $cartEntry->quantity + $quantity
+                ]);
+            }
+            else{
                 Cart::create([
                     'user_id' => Auth::user()->id,
                     'product_id' => $productId,
                     'quantity' => $quantity,
                     'size_id' => $size_id,
-                    'color_id' => $color_id,
+                    'color_id' =>$color_id,
                 ]);
-            }else{
+            }
+           
+        } else {
+            if ($size_id && $color_id) {
+                
+                    Cart::create([
+                        'user_id' => Auth::user()->id,
+                        'product_id' => $productId,
+                        'quantity' => $quantity,
+                        'size_id' =>$size_id,
+                        'color_id' => $color_id,
+                    ]);
+                
+            } else {
                 Cart::create([
                     'user_id' => Auth::user()->id,
                     'product_id' => $productId,

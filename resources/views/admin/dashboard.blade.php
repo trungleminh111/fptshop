@@ -2,9 +2,8 @@
 <html>
 
 <head>
-    <title></title>
+    <title>Dashboard</title>
     <link rel="stylesheet" href="{{asset('css/dashboard.css')}}" type="text/css" />
-    <script src="{{asset('js/admin.js')}}"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
@@ -62,15 +61,15 @@
         </div>
         <div class="col-div-3">
             <div class="box">
-                @php 
-                    $total = 0;
+                @php
+                $total = 0;
                 @endphp
                 @foreach($orderdetails as $orderdetail)
-                    @php
-                    $total += $orderdetail->price
-                    @endphp
-                    @endforeach
-                    <p>{{number_format($total)}}<br /><span>Doanh thu</span></p>
+                @php
+                $total += $orderdetail->price
+                @endphp
+                @endforeach
+                <p>{{number_format($total)}}<br /><span>Doanh thu</span></p>
                 <i class="fa fa-tasks box-icon"></i>
             </div>
         </div>
@@ -82,31 +81,23 @@
                     <p>Top 5 Sản phẩm bán chạy nhất <span>Sell All</span></p>
                     <br />
                     <table>
+
                         <tr>
-                            <th>Company</th>
-                            <th>Contact</th>
-                            <th>Country</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Số lượng đã bán</th>
                         </tr>
+                        @foreach($results as $item)
+
                         <tr>
-                            <td>Alfreds Futterkiste</td>
-                            <td>Maria Anders</td>
-                            <td>Germany</td>
+                            @foreach($products as $product)
+                            @if($product->id == $item->product_id)
+                            <td>{{$product->name}}</td>
+                            @endif
+                            @endforeach
+                            <td>{{$item->total_quantity}}</td>
                         </tr>
-                        <tr>
-                            <td>Centro comercial Moctezuma</td>
-                            <td>Francisco Chang</td>
-                            <td>Mexico</td>
-                        </tr>
-                        <tr>
-                            <td>Ernst Handel</td>
-                            <td>Roland Mendel</td>
-                            <td>Austria</td>
-                        </tr>
-                        <tr>
-                            <td>Island Trading</td>
-                            <td>Helen Bennett</td>
-                            <td>UK</td>
-                        </tr>
+                        @endforeach
+
                     </table>
                 </div>
             </div>
@@ -135,10 +126,11 @@
         <div class="clearfix"></div>
     </div>
 
+    <script src="{{asset('js/admin.js')}}"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-        $(".nav").click(function() {
+        $(".nav").click(function () {
             $("#mySidenav").css('width', '70px');
             $("#main").css('margin-left', '70px');
             $(".logo").css('visibility', 'hidden');
@@ -151,7 +143,7 @@
             $(".nav2").css('display', 'block');
         });
 
-        $(".nav2").click(function() {
+        $(".nav2").click(function () {
             $("#mySidenav").css('width', '300px');
             $("#main").css('margin-left', '300px');
             $(".logo").css('visibility', 'visible');
