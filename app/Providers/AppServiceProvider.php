@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use App\Models\Cart;
+use App\Models\Color;
+use App\Models\ProductVariant;
+use App\Models\Size;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Banner;
 use App\Models\Category;
@@ -30,10 +33,13 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('*', function ($view) {
             $view->with('categorys', Category::all());
             $view->with('products', Product::all());
+            $view->with('productAttr', ProductVariant::all());
             $view->with('banners', Banner::all());
             $view->with('users', User::all());
             $view->with('orderdetails', OrderDetail::all());
             $view->with('orders', Order::all());
+            $view->with('sizes', Size::all());
+            $view->with('colors', Color::all());
             if (!Auth::user()) {
                 $view->with('countcart', 0);
             } else {

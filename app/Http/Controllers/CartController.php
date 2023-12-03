@@ -21,13 +21,16 @@ class CartController extends Controller
 
     public function addtocart(Request $request)
     {
-        $productId = $request->id;
+        $productId = $request->product_id;
         $quantity = $request->quantity;
+        $size_id = $request->size_id;
+        $color_id = $request->color_id;
         $cartEntry = Cart::where('user_id', Auth::user()->id)
             ->where('product_id', $productId)
             ->first();
         $product = Product::find($productId);
         if (!$product) {
+            dd($request->all());
             return redirect()->back()->with('error', 'Product not found');
         }
         if ($cartEntry) {
@@ -35,11 +38,23 @@ class CartController extends Controller
                 'quantity' => $cartEntry->quantity + $quantity
             ]);
         } else {
-            Cart::create([
-                'user_id' => Auth::user()->id,
-                'product_id' => $productId,
-                'quantity' => $quantity,
-            ]);
+            if ($size_id && $color_id) {
+                Cart::create([
+                    'user_id' => Auth::user()->id,
+                    'product_id' => $productId,
+                    'quantity' => $quantity,
+                    'size_id' => $size_id,
+                    'color_id' => $color_id,
+                ]);
+            }else{
+                Cart::create([
+                    'user_id' => Auth::user()->id,
+                    'product_id' => $productId,
+                    'quantity' => $quantity,
+                    'size_id' => 0,
+                    'color_id' => 0,
+                ]);
+            }
         }
         return redirect()->back()->with('success', 'Product added to cart successfully');
     }
@@ -82,13 +97,13 @@ class CartController extends Controller
         $productId = $request->id;
         $quantity = $request->quantity;
         $cart = Cart::where('user_id', Auth::user()->id)
-        ->where('product_id', $productId)
-        ->first();
+            ->where('product_id', $productId)
+            ->first();
         if (isset($cart) && $quantity > 1) {
             $cart->update([
                 'quantity' => $cart->quantity - 1
             ]);
-        }else {
+        } else {
             $cart->delete();
         }
         return redirect()->back();
@@ -98,8 +113,8 @@ class CartController extends Controller
         $productId = $request->id;
         $quantity = $request->quantity;
         $cart = Cart::where('user_id', Auth::user()->id)
-        ->where('product_id', $productId)
-        ->first();
+            ->where('product_id', $productId)
+            ->first();
         if (isset($cart)) {
             $cart->update([
                 'quantity' => $cart->quantity + $quantity

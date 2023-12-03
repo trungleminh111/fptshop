@@ -19,18 +19,36 @@
                     </tr>
                 </thead>
                 <tbody style="height: 700px; overflow: overlay">
+                    @php
+                    $total =0;
+                    @endphp
                     @foreach($carts as $cart)
                     @foreach($products as $product)
+
                     @if($product->id == $cart->product_id)
-                    <tr class="item-cart row align-items-center">
+
+                    <tr class="item-cart row align-items-center mb-2">
                         <td class="col-md-5">
                             <div class="d-flex align-items-center">
                                 <img src="../uploads/{{$product->image}}" alt="" class="cImg-product">
                                 <div class="cName-product">{{$product->name}}</div>
 
                             </div>
-                            <div class="cName-product">Màu</div>
-                            <div class="cName-product">size</div>
+                            @if($cart->size_id !=0 && $cart->color_id !=0)
+
+                            @foreach($sizes as $size)
+                            @if($cart->size_id == $size->id)
+                            <div class="cName-product">Dung lượng : {{$size->name}}</div>
+                            @endif
+                            @endforeach
+
+                            @foreach($colors as $color)
+                            @if($cart->color_id == $color->id)
+                            <div class="cName-product">Màu : {{$color->name}}</div>
+                            @endif
+                            @endforeach
+
+                            @endif
                         </td>
                         <td class="col-md-3 d-flex justify-content-center">
                             <!-- Giảm Số Lượng Sản Phẩm -->
@@ -56,8 +74,29 @@
                         </td>
                         <td class="col-md-3">
                             <div class="cartPrice text-center">
+                                @if($cart->size_id != 0 && $cart->color_id != 0)
+
+                                @foreach($productAttr as $attr)
+
+                                @if($attr->product_id == $cart->product_id && $cart->color_id == $attr->color_id &&
+                                $cart->size_id == $attr->size_id)
+
+                                <span class="cPrice-product">{{number_format($attr->price * $cart->quantity)}}
+                                    đ</span>
+                                    @php
+                                    $total+= $attr->price * $cart->quantity
+                                    @endphp
+                                @endif
+
+                                @endforeach
+
+                                @else
                                 <span class="cPrice-product">{{number_format($product->price * $cart->quantity)}}
                                     đ</span>
+                                    @php
+                                    $total+= $product->price * $cart->quantity
+                                    @endphp
+                                @endif
                             </div>
                         </td>
                         <td class="col-md-1">
@@ -69,6 +108,7 @@
                         </td>
                     </tr>
                     @endif
+
                     @endforeach
                     @endforeach
                 </tbody>
@@ -89,18 +129,6 @@
                     <span><b>Tổng số tiền cần thanh toán</b></span>
                 </div>
                 <div class="col-md-6">
-                    @php
-                    $total = 0;
-                    @endphp
-                    @foreach($carts as $cart)
-                    @foreach($products as $product)
-                    @if($product->id == $cart->product_id)
-                    @php
-                    $total += $product->price * $cart->quantity;
-                    @endphp
-                    @endif
-                    @endforeach
-                    @endforeach
                     <span style="width:fit-content; font-size: 20px; font-weight: 700">
                         {{number_format($total)}} VNĐ
                     </span>

@@ -3,6 +3,8 @@
 namespace App\Admin\Controllers;
 
 use App\Models\Cart;
+use App\Models\Color;
+use App\Models\Size;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -30,6 +32,17 @@ class CartController extends AdminController
         $grid->column('user.name', __('User'));
         $grid->column('product.name', __('Product id'));
         $grid->column('quantity', __('Quantity'));
+        $grid->column(__('Color'))->display(function () {
+            $color_id = $this->color_id;
+            $color = Color::find($color_id);
+            return $color ? $color->name : 'N/A'; // Replace 'N/A' with a default value if color is not found
+        });
+    
+        $grid->column(__('Size'))->display(function () {
+            $size_id = $this->size_id;
+            $size = Size::find($size_id);
+            return $size ? $size->name : 'N/A'; // Replace 'N/A' with a default value if size is not found
+        });
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
 

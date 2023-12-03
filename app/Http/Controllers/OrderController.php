@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Color;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\Product;
+use App\Models\ProductVariant;
+use App\Models\Size;
 use App\Models\User;
 use App\Models\VnPay;
 use Illuminate\Http\Request;
@@ -40,8 +44,8 @@ class OrderController extends Controller
 
         $userCheckverify = User::find($data['user_id']);
         if (!$userCheckverify->email_verified_at) {
-            return redirect('/email/verify')->with('error','Vui lòng xác thực email');
-        }else{
+            return redirect('/email/verify')->with('error', 'Vui lòng xác thực email');
+        } else {
             if ($data['payment'] == 'ttol' && $data['total']) {
                 $this->vnpay_payment($data['total']);
             }
@@ -56,6 +60,7 @@ class OrderController extends Controller
 
     public function payment_delivery($user_id, $address)
     {
+        $productAttr = ProductVariant::all();
         $randomCode = Str::random(11);
         $order = new Order();
         $order->code = $randomCode;
@@ -67,19 +72,42 @@ class OrderController extends Controller
 
         $cart = Cart::all()->where('user_id', $user_id);
         foreach ($cart as $item) {
-            OrderDetail::create([
-                'order_id' => $order->id,
-                'product_id' => $item->product_id,
-                'price' => $item->product->price,
-                'quantity' => $item->quantity,
-            ]);
+            if ($item->size_id != 0 && $item->color_id) {
+                foreach ($productAttr as $attr) {
+                    if (
+                        $attr->product_id == $item->product_id && $item->color_id == $attr->color_id &&
+                        $item->size_id == $attr->size_id
+                    ) {
+                        OrderDetail::create([
+                            'order_id' => $order->id,
+                            'product_id' => $item->product_id,
+                            'price' => $attr->price,
+                            'quantity' => $item->quantity,
+                            'size_id' => $item->size_id,
+                            'color_id' => $item->color_id,
+                        ]);
+                    }
+                }
+            } else {
+                OrderDetail::create([
+                    'order_id' => $order->id,
+                    'product_id' => $item->product_id,
+                    'price' => $item->product->price,
+                    'quantity' => $item->quantity,
+                    'size_id' => $item->size_id,
+                    'color_id' => $item->color_id,
+                ]);
+            }
         }
 
         $user = Auth::user();
-
+        $sizes = Size::all();
+        $colors = Color::all();
         $data = [
             'order' => $order,
             'user' => $user,
+            'sizes' => $sizes,
+            'colors' => $colors,
             'orderDetails' => OrderDetail::where('order_id', $order->id)->with('Product')->get()
         ];
 
@@ -168,6 +196,7 @@ class OrderController extends Controller
     public function thankyou()
     {
         $cart = Cart::all()->where('user_id', Auth::user()->id);
+        $productAttr = ProductVariant::all();
         $order = new Order();
         $order->code = $_GET['vnp_TxnRef'];
         $order->user_id = Auth::user()->id;
@@ -177,15 +206,36 @@ class OrderController extends Controller
         $order->save();
 
         foreach ($cart as $item) {
-            OrderDetail::create([
-                'order_id' => $order->id,
-                'product_id' => $item->product_id,
-                'price' => $item->product->price,
-                'quantity' => $item->quantity,
-            ]);
+            if ($item->size_id != 0 && $item->color_id) {
+                foreach ($productAttr as $attr) {
+                    if (
+                        $attr->product_id == $item->product_id && $item->color_id == $attr->color_id &&
+                        $item->size_id == $attr->size_id
+                    ) {
+                        OrderDetail::create([
+                            'order_id' => $order->id,
+                            'product_id' => $item->product_id,
+                            'price' => $attr->price,
+                            'quantity' => $item->quantity,
+                            'size_id' => $item->size_id,
+                            'color_id' => $item->color_id,
+                        ]);
+                    }
+                }
+            } else {
+                OrderDetail::create([
+                    'order_id' => $order->id,
+                    'product_id' => $item->product_id,
+                    'price' => $item->product->price,
+                    'quantity' => $item->quantity,
+                    'size_id' => $item->size_id,
+                    'color_id' => $item->color_id,
+                ]);
+            }
         }
+
         $vnpay = new VnPay();
-        $vnpay->vnp_Amount = $_GET['vnp_Amount']/100;
+        $vnpay->vnp_Amount = $_GET['vnp_Amount'] / 100;
         $vnpay->vnp_BankCode = $_GET['vnp_BankCode'];
         $vnpay->vnp_CardType = $_GET['vnp_CardType'];
         $vnpay->vnp_OrderInfo = $_GET['vnp_OrderInfo'];
@@ -203,9 +253,13 @@ class OrderController extends Controller
 
         $user = Auth::user();
 
+        $sizes = Size::all();
+        $colors = Color::all();
         $data = [
             'order' => $order,
             'user' => $user,
+            'sizes' => $sizes,
+            'colors' => $colors,
             'orderDetails' => OrderDetail::where('order_id', $order->id)->with('Product')->get()
         ];
         $this->sendMail($data, $user);
