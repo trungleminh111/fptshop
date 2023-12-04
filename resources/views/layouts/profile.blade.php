@@ -7,10 +7,10 @@
         <div class="row no-gutters row-bordered row-border-light">
             <div class="col-md-3 pt-0">
                 <div class="list-group list-group-flush account-settings-links">
-                    <a class="list-group-item list-group-item-action active" data-toggle="list" href="#account-general">Thông tin cá nhân <span id="triangle-right"></span></a>
-                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-change-password">Thay đổi mật khẩu <span id="triangle-right"></span></a>
-                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-info">Đơn hàng của bạn <span id="triangle-right"></span></a>
-                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-like">Sản phẩm yêu thích <span id="triangle-right"></span></a>
+                <a class="list-group-item list-group-item-action active" data-toggle="list" href="#account-general"><i class="fa-regular fa-user"></i>Thông tin cá nhân <span id="triangle-right"></span></a>
+                <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-change-password"><i class="fa-solid fa-user-lock"></i>Thay đổi mật khẩu <span id="triangle-right"></span></a>
+                <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-info"><i class="fa-solid fa-truck-fast"></i>Đơn hàng của bạn <span id="triangle-right"></span></a>
+                <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-like"><i class="fa-solid fa-heart" style="color: #ff0000;"></i>Sản phẩm yêu thích <span id="triangle-right"></span></a>
                 </div>
             </div>
             <div class="col-md-9">

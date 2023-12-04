@@ -32,7 +32,7 @@ class LikeproductController extends Controller
         }
 
         if ($likeInt) {
-            return redirect()->back()->with('success', 'sản phẩm đã tồn tại');
+            return redirect()->back()->with('success', 'Sản phẩm đã tồn tại');
         }else {
             Likeproduct::create([
                 'user_id' => $userId,
@@ -52,7 +52,7 @@ class LikeproductController extends Controller
             session()->flash('error', 'Cart not found');
         }
         $likeproduct->delete();
-        session()->flash('success', 'Delete successfully');
+        session()->flash('success', 'Đã xoá yêu thích');
         return redirect()->back();
     }
 }

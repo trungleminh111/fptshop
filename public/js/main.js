@@ -6,7 +6,7 @@ $(document).ready(function () {
         lazyLoad: true,
         autoplay: true,
         autoplayTimeout: 5000,
-        responsiveClass: true,
+        responsiveClass: false,
         responsive: {
             0: {
                 items: 1,
@@ -19,19 +19,9 @@ $(document).ready(function () {
             1000: {
                 items: 5,
                 nav: true,
-                loop: false
             }
         }
     })
-
-    $("#color1").click(function(){
-        $("#icon-check1").addClass("fa-solid fa-check pd-icon--check");
-        $("#icon-check2").removeClass("fa-solid fa-check pd-icon--check");
-    });
-    $("#color2").click(function(){
-        $("#icon-check2").addClass("fa-solid fa-check pd-icon--check");
-        $("#icon-check1").removeClass("fa-solid fa-check pd-icon--check");
-    });
 });
 
 

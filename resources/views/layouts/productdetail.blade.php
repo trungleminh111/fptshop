@@ -18,6 +18,7 @@
             <input type="hidden" id="colorIdInput" name="color_id" value="{{ $minPriceVariantColorId }}">
             @endif
             @endforeach
+            <!-- Header page -->
             <div class="row">
                 <div class="col-md-12">
                     <a href="/">Trang chủ</a>/<a href="../category/{{ $product->category_id }}">Điện thoại</a>/<a href="">{{$product->description}}</a>
@@ -38,19 +39,20 @@
                 <div class="col-md-12">
                     <div class="row">
                         <div class="col-md-6">
+                            <!-- ảnh sản phẩm -->
                             <div class="km-image pd-image">
                                 <div id="carouselExample" class="carousel slide h-100">
                                     <div class="carousel-inner h-100">
+                                        <div class="carousel-item h-100 active">
+                                            <img src="../uploads/{{$product->image}}" class="d-block w-100 h-100 pd-image--img" alt="...">
+                                        </div>
                                         @foreach ($variants->unique('color_id') as $variant)
                                         @if($variant->product_id == $product->id)
-                                        <div class="carousel-item h-100 active">
+                                        <div class="carousel-item h-100">
                                             <img src="../uploads/{{$variant->image}}" class="d-block w-100 h-100 pd-image--img" alt="...">
                                         </div>
                                         @endif
                                         @endforeach
-                                        <div class="carousel-item h-100">
-                                            <img src="../uploads/{{$product->image}}" class="d-block w-100 h-100 pd-image--img" alt="...">
-                                        </div>
                                     </div>
                                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
                                         <span class="carousel-control carousel-control-prev-icon" aria-hidden="true"><i class="fa-solid fa-circle-chevron-left"></i></span>
@@ -66,6 +68,7 @@
                                     <span class="pd-pricesale">Giảm 2.000.000 đ</span>
                                 </a>
                             </div>
+                            <!-- cấu hình sản phẩm -->
                             <div class="pd-configuration w-100">
                                 <ul>
                                     <li><i class="fa-solid fa-mobile"></i>6.7 inch, 19 inch, Dynamic AMOLED 2X, FHD+,
@@ -78,6 +81,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
+                            <!-- giá bán sản phẩm -->
                             <div class="mb-3 pd-price">
                                 <span class="pd-price--text">Giá bản tiêu chuẩn</span>
                                 @if($variants->first())
@@ -86,6 +90,7 @@
                                 <h4 class="pd-price--number">{{ number_format($product->price) }} ₫</h4>
                                 @endif
                             </div>
+                            <!-- dung lượng sản phẩm -->
                             <div class="mb-3 pd-capacity" id="size-radio-buttons">
                                 @foreach ($variants->unique('size_id') as $variant)
                                 <div class="radio">
@@ -97,15 +102,16 @@
                                 </div>
                                 @endforeach
                             </div>
-                            <div class="mb-3 pd-color row">
+                            <!-- các màu sản phẩm -->
+                            <div class="mb-3 pd-color row nav nav-pills">
                                 @foreach ($variants->unique('color_id') as $variant)
-                                <div class="pd-color-item" id="color-radio-buttons">
+                                <div class="pd-color-item nav-item" id="color-radio-buttons">
                                     <label for="{{ $variant->color->id }}">
                                         <div class="pdcolor-img" id="color">
-                                            <div class="check-color" id="color{{ $variant->color->id }}" style="position: relative;">
+                                            <div class="check-color nav-link" data-bs-toggle="pill" id="color{{ $variant->color->id }}">
                                                 <img for="" src="../uploads/{{$variant->image}}" alt="" class="w-100">
                                                 <span class="pdcolor-text">{{ $variant->color->name}}</span>
-                                                <i class="" id="icon-check{{ $variant->color->id }}"></i>
+                                                <i class="fa-solid fa-check pd-icon--check" id="icon-check{{ $variant->color->id }}"></i>
                                             </div>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input variant-checkbox d-none" type="radio" value="{{ $variant->color->id }}" name="color" id="{{ $variant->color->id }}" @if($variant->color->id ==
@@ -116,6 +122,8 @@
                                 </div>
                                 @endforeach
                             </div>
+
+                            <!-- Ưu đãi bảo hành -->
                             <div class="pd-endow">
                                 <h1 class="pd-endow--title">Ưu đãi đặc biệt</h1>
                                 <span><i class="fa-solid fa-gift"></i>Đặc quyền bảo hành 2 năm</span>
@@ -176,11 +184,7 @@
                 url: "{{ route('get_variant_price') }}",
                 method: 'GET',
                 data: {
-                    product_id: {
-                        {
-                            $product -> id
-                        }
-                    },
+                    product_id: {{$product->id}},
                     size_id: sizeId,
                     color_id: colorId,
                 },

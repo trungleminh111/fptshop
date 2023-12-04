@@ -71,7 +71,7 @@ class CartController extends Controller
                 ]);
             }
         }
-        return redirect()->back()->with('success', 'Product added to cart successfully');
+        return redirect()->back()->with('success', 'Thêm vào giỏ hàng thành công');
     }
 
     public function updatecart(Request $request)
@@ -80,18 +80,15 @@ class CartController extends Controller
         $quantity = $request->quantity;
         $cart = Cart::find($cartId);
         if (!$cart) {
-            //nut test demo o chan footer kiem tra db
-            // sử dụng ajax (ajax demo ở footer.blade.php)
             session()->flash('error', 'Cart not found');
         }
         if ($cart->user_id != Auth::user()->id) {
-            // sử dụng ajax 
             session()->flash('error', 'You are not buying');
         }
         $cart->update([
             'quantity' => $quantity,
         ]);
-        session()->flash('success', 'Cart updated successfully');
+        session()->flash('success', 'Cập nhật giỏ hàng thành công!');
     }
 
     public function deletecart(Request $request)
@@ -104,7 +101,7 @@ class CartController extends Controller
         }
         $cart->delete();
         // sử dụng ajax
-        session()->flash('success', 'Delete successfully');
+        session()->flash('success', 'Xoá thành công');
         return redirect()->back();
     }
     public function reduce(Request $request)
