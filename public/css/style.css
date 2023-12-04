@@ -305,6 +305,12 @@ body {
     text-decoration: line-through;
 }
 
+.box-likexem {
+    display: flex; 
+    justify-content: center; 
+    justify-content: space-evenly;
+}
+
 .km-btn {
     width: fit-content;
     height: 40px;

@@ -30,7 +30,15 @@
                     <tr class="item-cart row align-items-center mb-2">
                         <td class="col-md-5">
                             <div class="d-flex align-items-center">
-                                <img src="../uploads/{{$product->image}}" alt="" class="cImg-product">
+                                @foreach ($productAttr as $variant )
+                                @foreach($sizes as $size)
+                                @foreach($colors as $color)
+                                    @if($cart->size_id == $size->id && $cart->color_id == $color->id && $variant->size_id ==  $size->id && $variant->color_id ==  $color->id && $variant->product_id == $cart->product_id )
+                                    <img src="../uploads/{{$variant->image}}" alt="" class="cImg-product">
+                                    @endif
+                                @endforeach
+                                @endforeach
+                                @endforeach
                                 <div class="cName-product">{{$product->name}}</div>
 
                             </div>

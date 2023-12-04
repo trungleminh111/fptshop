@@ -113,14 +113,21 @@
                                 <span>96 đánh giá</span>
                             </div>
                         </div>
-                        <form action="{{route('addtocart')}}" method="post">
-                            <div class="" style="display: flex; justify-content: center;">
+                        <div class="box-likexem">
+                            <a href="../product/{{ $product->id }}"><button type="submit" class="km-btn">Xem chi tiết</button></a>
+                            <form action="{{ route('like_product') }}" method="post">
                                 @csrf
-                                <input type="hidden" name="quantity" value="1">
-                                <input type="hidden" name="id" value="{{$product->id}}">
-                                <button type="submit" class="km-btn">Add to Card</button>
-                            </div>
-                        </form>
+                                @guest
+                                @if (Route::has('login'))
+                                <button type="submit" class="km-btn"><i class="fa-regular fa-heart"></i></button>
+                                @endif
+                                @else
+                                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                <button type="submit" class="km-btn"><i class="fa-solid fa-heart"></i></button>
+                                @endguest
+                            </form>
+                        </div>
                         <div class="payment">
                             <img src="{{asset('../images/paykredivo.webp')}}" id="payment-kredivo">
                             <img src="{{asset('../images/payzalo.webp')}}" id="payment-zalo">
@@ -158,8 +165,7 @@
                 $maxP = 1;
                 @endphp
                 @foreach($products as $product)
-                @if ($product->category_id == $category->id && $maxP <= 8) 
-                <div class="col-md-3 pPhone-item">
+                @if ($product->category_id == $category->id && $maxP <= 8) <div class="col-md-3 pPhone-item">
                     <div class="pPhone-image">
                         <a href="../product/{{ $product->id }}">
                             <img src="../uploads/{{$product->image}}" alt="" class="pPhone-img">
@@ -179,14 +185,21 @@
                                 <span>96 đánh giá</span>
                             </div>
                         </div>
-                        <form action="{{ route('addtocart') }}" method="post">
-                            <div class="" style="display: flex; justify-content: center;">
+                        <div class="box-likexem">
+                            <a href="../product/{{ $product->id }}"><button type="submit" class="km-btn">Xem chi tiết</button></a>
+                            <form action="{{ route('like_product') }}" method="post">
                                 @csrf
-                                <input type="hidden" name="quantity" value="1">
-                                <input type="hidden" name="id" value="{{$product->id}}">
-                                <button type="submit" class="pPhone-btn km-btn">Add to Card</button>
-                            </div>
-                        </form>
+                                @guest
+                                @if (Route::has('login'))
+                                <button type="submit" class="km-btn"><i class="fa-regular fa-heart"></i></button>
+                                @endif
+                                @else
+                                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                <button type="submit" class="km-btn"><i class="fa-solid fa-heart"></i></button>
+                                @endguest
+                            </form>
+                        </div>
                         <div class="payment">
                             <img src="{{asset('../images/paykredivo.webp')}}" id="payment-kredivo">
                             <img src="{{asset('../images/payzalo.webp')}}" id="payment-zalo">

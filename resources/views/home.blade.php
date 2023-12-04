@@ -113,14 +113,15 @@
                                 <span>96 đánh giá</span>
                             </div>
                         </div>
-                        <form action="{{route('addtocart')}}" method="post">
-                            <div class="" style="display: flex; justify-content: center;">
-                                @csrf
-                                <input type="hidden" name="quantity" value="1">
-                                <input type="hidden" name="id" value="{{$product->id}}">
-                                <button type="submit" class="km-btn">Add to Card</button>
+                        <div class="box-likexem">
+                                <a href="../product/{{ $product->id }}"><button type="submit" class="km-btn">Xem chi tiết</button></a>
+                                <form action="{{ route('like_product') }}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                    <button type="submit" class="km-btn"><i class="fa-regular fa-heart"></i></button>
+                                </form>
                             </div>
-                        </form>
                         <div class="payment">
                             <img src="{{asset('../images/paykredivo.webp')}}" id="payment-kredivo">
                             <img src="{{asset('../images/payzalo.webp')}}" id="payment-zalo">
@@ -179,14 +180,9 @@
                                 <span>96 đánh giá</span>
                             </div>
                         </div>
-                        <form action="{{ route('addtocart') }}" method="post">
-                            <div class="" style="display: flex; justify-content: center;">
-                                @csrf
-                                <input type="hidden" name="quantity" value="1">
-                                <input type="hidden" name="id" value="{{$product->id}}">
-                                <button type="submit" class="pPhone-btn km-btn">Add to Card</button>
+                        <div class="box-likexem">
+                                <a href="../product/{{ $product->id }}"><button type="submit" class="km-btn">Xem chi tiết</button></a>
                             </div>
-                        </form>
                         <div class="payment">
                             <img src="{{asset('../images/paykredivo.webp')}}" id="payment-kredivo">
                             <img src="{{asset('../images/payzalo.webp')}}" id="payment-zalo">

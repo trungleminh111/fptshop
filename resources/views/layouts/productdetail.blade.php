@@ -20,8 +20,7 @@
             @endforeach
             <div class="row">
                 <div class="col-md-12">
-                    <a href="/">Trang chủ</a>/<a href="../category/{{ $product->category_id }}">Điện thoại</a>/<a
-                        href="">{{$product->description}}</a>
+                    <a href="/">Trang chủ</a>/<a href="../category/{{ $product->category_id }}">Điện thoại</a>/<a href="">{{$product->description}}</a>
                 </div>
                 <div class="col-md-12 d-flex justify-content-between pd-header">
                     <div class="pdName">
@@ -40,8 +39,29 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="km-image pd-image">
-                                <a href="../product/{{ $product->id }}" class="d-flex justify-content-center">
-                                    <img src="../uploads/{{$product->image}}" alt="" class="pd-image--img">
+                                <div id="carouselExample" class="carousel slide h-100">
+                                    <div class="carousel-inner h-100">
+                                        @foreach ($variants->unique('color_id') as $variant)
+                                        @if($variant->product_id == $product->id)
+                                        <div class="carousel-item h-100 active">
+                                            <img src="../uploads/{{$variant->image}}" class="d-block w-100 h-100 pd-image--img" alt="...">
+                                        </div>
+                                        @endif
+                                        @endforeach
+                                        <div class="carousel-item h-100">
+                                            <img src="../uploads/{{$product->image}}" class="d-block w-100 h-100 pd-image--img" alt="...">
+                                        </div>
+                                    </div>
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                                        <span class="carousel-control carousel-control-prev-icon" aria-hidden="true"><i class="fa-solid fa-circle-chevron-left"></i></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                                        <span class="carousel-control carousel-control-next-icon" aria-hidden="true"><i class="fa-solid fa-circle-chevron-right"></i></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
+                                </div>
+                                <a href="../product/{{ $product->id }}" class="d-flex justify-content-center" style="top: 0;">
                                     <img src="{{asset('../images/khung.webp')}}" alt="" class="km-borders">
                                     <span class="pd-pricesale">Giảm 2.000.000 đ</span>
                                 </a>
@@ -70,8 +90,7 @@
                                 @foreach ($variants->unique('size_id') as $variant)
                                 <div class="radio">
                                     <div>
-                                        <input value="{{ $variant->size->id }}" type="radio" name="dl" id="size"
-                                        @if($variant->size->id == $minPriceVariantSizeId) checked @endif>
+                                        <input value="{{ $variant->size->id }}" type="radio" name="dl" id="size" @if($variant->size->id == $minPriceVariantSizeId) checked @endif>
                                         <label for="size">{{ $variant->size->name }}</label>
                                     </div>
                                     <label for="{{ $variant->color->id }}">{{ number_format($variant->price) }}đ</label>
@@ -83,16 +102,13 @@
                                 <div class="pd-color-item" id="color-radio-buttons">
                                     <label for="{{ $variant->color->id }}">
                                         <div class="pdcolor-img" id="color">
-                                            <div class="check-color" id="color{{ $variant->color->id }}"
-                                                style="position: relative;">
+                                            <div class="check-color" id="color{{ $variant->color->id }}" style="position: relative;">
                                                 <img for="" src="../uploads/{{$variant->image}}" alt="" class="w-100">
                                                 <span class="pdcolor-text">{{ $variant->color->name}}</span>
                                                 <i class="" id="icon-check{{ $variant->color->id }}"></i>
                                             </div>
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input variant-checkbox d-none" type="radio"
-                                                    value="{{ $variant->color->id }}" name="color"
-                                                    id="{{ $variant->color->id }}" @if($variant->color->id ==
+                                                <input class="form-check-input variant-checkbox d-none" type="radio" value="{{ $variant->color->id }}" name="color" id="{{ $variant->color->id }}" @if($variant->color->id ==
                                                 $minPriceVariantColorId) checked @endif>
                                             </div>
                                         </div>
@@ -109,7 +125,7 @@
                             </div>
                             <div class="mb-3 pd-oder">
                                 <a href="">
-                                    <button type="submit" class="btn-addtocart">Mua Ngay</button>
+                                    <button type="submit" class="btn-addtocart">Thêm vào giỏ hàng</button>
                                 </a>
                             </div>
                         </div>
@@ -121,7 +137,7 @@
 
 </div>
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         function setDefaultValues() {
             const defaultSizeId = $('input[name="size_id"]').val();
             const defaultColorId = $('input[name="color_id"]').val();
@@ -131,7 +147,7 @@
             $('#color-radio-buttons input[type="radio"]').change();
         }
 
-        $('.pdcolor-img-img').click(function () {
+        $('.pdcolor-img-img').click(function() {
             const radio = $(this).closest('.pdcolor-item').find('input[type="radio"][name="color"]');
 
             $(this).closest('.pdcolor-img').toggleClass('color-selected', radio.prop('checked'));
@@ -139,16 +155,16 @@
             radio.prop('checked', true);
             updatePrice();
         });
-        $('#size-radio-buttons input[type="radio"]').change(function () {
+        $('#size-radio-buttons input[type="radio"]').change(function() {
             const size = $('input[name="dl"]:checked').val()
             $('#sizeIdInput').val(size);
         });
-        $('#color-radio-buttons input[type="radio"]').change(function () {
+        $('#color-radio-buttons input[type="radio"]').change(function() {
             const color = $('input[name="color"]:checked').val()
             $('#colorIdInput').val(color);
         });
 
-        $('#size, #color').on('change', function () {
+        $('#size, #color').on('change', function() {
             updatePrice();
         });
 
@@ -160,14 +176,18 @@
                 url: "{{ route('get_variant_price') }}",
                 method: 'GET',
                 data: {
-                    product_id: {{$product->id}},
+                    product_id: {
+                        {
+                            $product -> id
+                        }
+                    },
                     size_id: sizeId,
                     color_id: colorId,
                 },
-                success: function (response) {
+                success: function(response) {
                     $('#display-price').text(response.price + '₫');
                 },
-                error: function (error) {
+                error: function(error) {
                     console.log(error);
                 }
             });

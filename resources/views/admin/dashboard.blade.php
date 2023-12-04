@@ -49,7 +49,7 @@
         </div>
         <div class="col-div-3">
             <div class="box">
-                <p>88<br /><span>Projects</span></p>
+                <p>{{$likeproducts->count()}}<br /><span>Lượt thích sản phẩm</span></p>
                 <i class="fa fa-list box-icon"></i>
             </div>
         </div>

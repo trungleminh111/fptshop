@@ -9,6 +9,7 @@ use App\Models\Size;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Banner;
 use App\Models\Category;
+use App\Models\Likeproduct;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Product;
@@ -33,6 +34,7 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('*', function ($view) {
             $view->with('categorys', Category::all());
             $view->with('products', Product::all());
+            $view->with('likeproducts', Likeproduct::all());
             $view->with('productAttr', ProductVariant::all());
             $view->with('banners', Banner::all());
             $view->with('users', User::all());

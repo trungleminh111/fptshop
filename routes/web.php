@@ -40,3 +40,7 @@ Route::get('/thank-you',[OrderController::class,'thankyou'])->name('thankyou');
 Route::get('/profile', [App\Http\Controllers\UserController::class, 'profile']);
 Route::post('/up-info-profile', [App\Http\Controllers\UserController::class, 'upInfoProfile'])->name('upinfo');
 Route::post('/up-pass-profile', [App\Http\Controllers\UserController::class, 'upPassProfile'])->name('uppassword');
+
+Route::get('/like-product', [App\Http\Controllers\LikeproductController::class, 'index']);
+Route::post('/like-product', [App\Http\Controllers\LikeproductController::class, 'likeProduct'])->name('like_product');
+Route::post('/delete-likeproduct', [App\Http\Controllers\LikeproductController::class, 'deleteLikeProduct'])->name('delete_productlike');

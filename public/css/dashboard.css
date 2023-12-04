@@ -162,6 +162,7 @@ body {
   
   .box-8 {
     margin-left: 10px;
+    height: fit-content;
   }
   
   table {

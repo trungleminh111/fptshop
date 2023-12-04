@@ -10,6 +10,7 @@
                     <a class="list-group-item list-group-item-action active" data-toggle="list" href="#account-general">Thông tin cá nhân <span id="triangle-right"></span></a>
                     <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-change-password">Thay đổi mật khẩu <span id="triangle-right"></span></a>
                     <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-info">Đơn hàng của bạn <span id="triangle-right"></span></a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-like">Sản phẩm yêu thích <span id="triangle-right"></span></a>
                 </div>
             </div>
             <div class="col-md-9">
@@ -81,22 +82,28 @@
                         <div class="card-body pb-2">
                             <table>
                                 <thead>
+                                    @if(is_null($orderdetails))
+                                    <h5>Bạn chưa thích sản phẩm nào</h5>
+                                    @else
                                     <tr>
                                         <th>Tên sản phẩm</th>
-                                        <th>Giá</th>
+                                        <th class="text-center">Giá</th>
                                         <th>Số lượng</th>
-                                        <th>Thành tiền</th>
+                                        <th class="text-center">Thành tiền</th>
                                     </tr>
+                                    @endif
                                 </thead>
                                 <tbody>
                                     @php
                                     $totalPrice = 0;
                                     @endphp
                                     @foreach($orderdetails as $detail)
+                                    @foreach($orders as $orderdetail)
+                                    @if($orderdetail->user_id == Auth::user()->id && $detail->order_id == $orderdetail->id)
                                     <tr>
                                         <td>{{ $detail->product->name }}</td>
-                                        <td>{{ number_format($detail->price) }} VNĐ</td>
-                                        <td>{{ $detail->quantity }}</td>
+                                        <td class="text-end">{{ number_format($detail->price) }} VNĐ</td>
+                                        <td class="text-center">{{ $detail->quantity }}</td>
                                         <td>
                                             @php
                                             $itemTotal = $detail->price * $detail->quantity;
@@ -105,14 +112,58 @@
                                             {{ number_format($itemTotal) }} VNĐ
                                         </td>
                                     </tr>
+                                    @endif
+                                    @endforeach
                                     @endforeach
                                 </tbody>
                             </table>
-                            <p>Tổng giá: {{ number_format($totalPrice) }} VNĐ</p>
+                            <p style="    font-size: 25px;font-weight: 600;margin: 50px 0;">Tổng giá: {{ number_format($totalPrice) }} VNĐ</p>
                         </div>
                         <div class="text-right mt-3" style="float: right;">
                             <button type="button" class="btn btn-primary">Save changes</button>&nbsp;
                             <button type="button" class="btn btn-default">Cancel</button>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="account-like">
+                        <div class="card-body pb-2">
+                            <table>
+                                <thead>
+                                    @if(is_null($likeproducts))
+                                    <h5>Bạn chưa thích sản phẩm nào</h5>
+                                    @else
+                                    <tr>
+                                        <th class="p-2">Tên sản phẩm</th>
+                                        <th class="text-center p-2">Ảnh</th>
+                                        <th class="p-2">Mua hàng</th>
+                                        <th class="p-2">Xoá</th>
+                                    </tr>
+                                    @endif
+                                </thead>
+                                <tbody>
+                                    @foreach($likeproducts as $detail)
+                                    @foreach($products as $product)
+                                    @if($product->id == $detail->product_id && $detail->user_id == Auth::user()->id)
+                                    <tr>
+                                        <td class="text-center p-2">{{ $product->name }}</td>
+                                        <td class="text-center p-2">
+                                            <img src="../uploads/{{$product->image}}" alt="" style="width: 100px;height:100px">
+                                        </td>
+                                        <td class="text-center p-2">
+                                            <a href="../product/{{ $product->id }}"><button class="km-btn">Mua ngay</button></a>
+                                        </td>
+                                        <td class="text-center p-2">
+                                            <form action="{{route('delete_productlike')}}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="like_id" value="{{$detail->id}}">
+                                                <button type="submit" class="btn-remove"><i class="fa-solid fa-xmark"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    @endif
+                                    @endforeach
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                     @endguest
