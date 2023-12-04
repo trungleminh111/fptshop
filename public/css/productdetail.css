@@ -186,3 +186,54 @@
     display: flex;
     align-items: center;
 }
+
+/* comment */
+
+.review-product {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    height: fit-content;
+    padding: 30px;
+}
+
+.comment-title {
+    border-bottom: 1px solid #ccc;
+}
+
+.comment {
+    display: flex;
+    flex-wrap: nowrap;
+    border-bottom: 1px solid #ccc;
+    margin: 30px 0;
+}
+
+.comment-imageUser {
+    width: fit-content;
+    padding: 10px;
+}
+
+.btn-review {
+    border: 1px solid #ccc;
+    background: #ccc;
+    color: #000;
+    font-size: 20px;
+    font-weight: 700;
+    width: fit-content;
+    height: 50px;
+    padding: 10px;
+    margin-left: 10px;
+}
+
+.btn-deletecomment {
+    border: 1px solid #ccc;
+    width: fit-content;
+    padding: 0 30px;
+    background: unset;
+    margin: 10px 0;
+}
+
+.star-check {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+}

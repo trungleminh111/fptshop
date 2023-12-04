@@ -20,7 +20,6 @@ Route::get('/', [App\Http\Controllers\HomePublicController::class, 'index']);
 Route::get('/category/{id}', [App\Http\Controllers\HomePublicController::class, 'category']);
 Route::get('/product/{id}', [App\Http\Controllers\HomePublicController::class, 'product']);
 Route::get('/get-variant-price', [App\Http\Controllers\HomePublicController::class,'getVariantPrice'])->name('get_variant_price');
-
 Route::get('/search', [App\Http\Controllers\HomePublicController::class, 'search'])->name('search');
 
 Auth::routes(['verify' => true]);
@@ -44,3 +43,10 @@ Route::post('/up-pass-profile', [App\Http\Controllers\UserController::class, 'up
 Route::get('/like-product', [App\Http\Controllers\LikeproductController::class, 'index']);
 Route::post('/like-product', [App\Http\Controllers\LikeproductController::class, 'likeProduct'])->name('like_product');
 Route::post('/delete-likeproduct', [App\Http\Controllers\LikeproductController::class, 'deleteLikeProduct'])->name('delete_productlike');
+
+
+Route::post('/delete_orderdetail', [App\Http\Controllers\OrderDetailController::class, 'deleteOrderDetail'])->name('delete_orderdetail');
+
+
+Route::post('/comment-product', [App\Http\Controllers\ReviewproductController::class, 'comment'])->name('comment-product');
+Route::post('/delete_review', [App\Http\Controllers\ReviewproductController::class, 'deleteReviewComment'])->name('delete_review');

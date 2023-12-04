@@ -83,7 +83,6 @@
                 </div>
             </div>
         </div>
-        <button id="test">test</button>
         <div class="footerBot">
             <span>Copy Right HieuTrung</span>
         </div>

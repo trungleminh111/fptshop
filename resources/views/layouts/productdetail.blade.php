@@ -33,7 +33,9 @@
                         <i class="fa-solid fa-star star-icon"></i>
                         <i class="fa-solid fa-star star-icon"></i>
                         <i class="fa-solid fa-star star-icon"></i>
-                        <span>96 đánh giá</span>
+                        <span>
+                        90
+                        </span>
                     </div>
                 </div>
                 <div class="col-md-12">
@@ -141,6 +143,90 @@
                 </div>
             </div>
         </form>
+        <div class="col-12 review-product">
+            <div class="col-12 mb-5">
+                <h2 class="comment-title">Đánh Giá Sản Phẩm</h2>
+                <form action="{{ route('comment-product') }}" method="post" class="d-flex align-items-center">
+                    @csrf
+                    <div class="star-check">
+                        <div class="1star">
+                            <input type="radio" name="star" value="1" id="1star">
+                            <label for="1star"><i class="fa-solid fa-star star-icon"></i></label>
+                        </div>
+                        <div class="2star">
+                            <input type="radio" name="star" value="2" id="2star">
+                            <label for="2star">
+                                <i class="fa-solid fa-star star-icon"></i>
+                                <i class="fa-solid fa-star star-icon"></i>
+                            </label>
+                        </div>
+                        <div class="3star">
+                            <input type="radio" name="star" value="3" id="3star">
+                            <label for="3star">
+                                <i class="fa-solid fa-star star-icon"></i>
+                                <i class="fa-solid fa-star star-icon"></i>
+                                <i class="fa-solid fa-star star-icon"></i>
+                            </label>
+                        </div>
+                        <div class="4star">
+                            <input type="radio" name="star" value="4" id="4star">
+                            <label for="4star">
+                                <i class="fa-solid fa-star star-icon"></i>
+                                <i class="fa-solid fa-star star-icon"></i>
+                                <i class="fa-solid fa-star star-icon"></i>
+                                <i class="fa-solid fa-star star-icon"></i>
+                            </label>
+                        </div>
+                        <div class="5star">
+                            <input type="radio" name="star" value="5" id="5star">
+                            <label for="5star">
+                                <i class="fa-solid fa-star star-icon"></i>
+                                <i class="fa-solid fa-star star-icon"></i>
+                                <i class="fa-solid fa-star star-icon"></i>
+                                <i class="fa-solid fa-star star-icon"></i>
+                                <i class="fa-solid fa-star star-icon"></i>
+                            </label>
+                        </div>
+                    </div>
+                    <input type="tel" name="comment" id="" style="width: 100%; height: 80px;">
+                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                    <button type="submit" class="btn-review">Gửi</button>
+                </form>
+            </div>
+            <h5 class="col-12">Các đánh giá về sản phẩm</h5>
+            @foreach($reviewproducs as $reviewproduc)
+            @if($reviewproduc->product_id == $product->id)
+            <div class="col-12 comment">
+                <div class="comment-imageUser">
+                    <img src="{{ asset('../images/user.png') }}" alt="">
+                </div>
+                <div class="comment-box">
+                    @foreach($users as $user)
+                    @if($reviewproduc->user_id == $user->id)
+                    <h5 class="nameUser">{{$user->name}}</h5>
+                    @endif
+                    @endforeach
+                    <div class="pdRate">
+                        @for($i = 1 ; $i <= $reviewproduc->sao; $i++)
+                        <i class="fa-solid fa-star star-icon"></i>
+                        @endfor
+                    </div>
+                    <span class="comment-content">
+                        {{$reviewproduc->noidung}}
+                    </span>
+                    @if($reviewproduc->user_id == Auth::user()->id)
+                    <form action="{{ route('delete_review') }}" method="post">
+                        @csrf
+                        <input type="hidden" name="comment_id" value="{{$reviewproduc->id}}">
+                        <button type="submit" class="btn-deletecomment">Xoá</button>
+                    </form>
+                    @endif
+                </div>
+            </div>
+            @endif
+            @endforeach
+        </div>
     </div>
 
 </div>
@@ -184,7 +270,11 @@
                 url: "{{ route('get_variant_price') }}",
                 method: 'GET',
                 data: {
-                    product_id: {{$product->id}},
+                    product_id: {
+                        {
+                            $product - > id
+                        }
+                    },
                     size_id: sizeId,
                     color_id: colorId,
                 },

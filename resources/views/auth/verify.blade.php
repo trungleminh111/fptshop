@@ -3,14 +3,11 @@
 @extends('layouts.app')
 
 @section('content')
-
-
 <div class="container">
-<div class="py-5"></div>
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Verify Your Email Address') }}</div>
+            <div class="card" style="margin: 100px 0;">
+                <div class="card-header"><h3>{{ __('Xác thực địa chỉ Email') }}</h3></div>
 
                 <div class="card-body">
                     @if (session('resent'))
@@ -19,13 +16,13 @@
                         </div>
                     @endif
 
-                    <p>{{ __('Before proceeding, please check your email for a verification link.') }}</p>
-                    <p>{{ __('If you did not receive the email') }},</p>
+                    <b>{{ __('Vui lòng kiểm tra Email của bạn và nhấn')}} <span style="color: red;">"Verify Email Address"</span> {{ __('để xác thực Email') }}</b>
+                    <p style="color: red; text-decoration: underline;">{{ __('Tin nhắn có thể nằm trong thư mục rác!') }}</p>
 
                     <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
                         @csrf
                         <button type="submit" class="btn btn-primary">
-                            {{ __('Click here to request another') }}
+                            {{ __('Gửi lại Email') }}
                         </button>
                     </form>
                 </div>

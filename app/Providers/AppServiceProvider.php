@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Reviewproduct;
 use App\Models\Cart;
 use App\Models\Color;
 use App\Models\ProductVariant;
@@ -35,6 +36,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('categorys', Category::all());
             $view->with('products', Product::all());
             $view->with('likeproducts', Likeproduct::all());
+            $view->with('reviewproducs', Reviewproduct::all());
             $view->with('productAttr', ProductVariant::all());
             $view->with('banners', Banner::all());
             $view->with('users', User::all());

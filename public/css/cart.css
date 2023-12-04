@@ -56,7 +56,7 @@ tbody::-webkit-scrollbar-thumb
     height: 30px;
     background-color: #c61d1d;
     border: none;
-    border-radius: 10px;
+    border-radius: 50%;
     color: #FFFFFF;
     font-weight: 700;
     font-size: 15px;
@@ -82,6 +82,22 @@ tbody::-webkit-scrollbar-thumb
     justify-content: center;
     align-items: center;
     text-decoration: none;
+}
+
+.btn-xacnhan {
+    height: 40px;
+    background-color: #c61d1d;
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 15px;
+    border: none;
+    padding: 0 10px;
+}
+
+.btn-xacnhan:hover {
+    background-color: unset;
+    border: 1px solid #000000;
+    color: #000000;
 }
 
 /* Check Out */

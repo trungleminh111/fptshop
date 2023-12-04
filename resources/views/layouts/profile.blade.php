@@ -14,6 +14,7 @@
                 </div>
             </div>
             <div class="col-md-9">
+                <!-- Thông tin cá nhân -->
                 <div class="tab-content">
                     <div class="tab-pane fade active show" id="account-general">
                         <hr class="border-light m-0">
@@ -46,6 +47,7 @@
                             </div>
                         </form>
                     </div>
+                    <!-- Thay đổi mật khẩu -->
                     <div class="tab-pane fade" id="account-change-password">
                         <form action="{{ route('uppassword') }}" method="post">
                             @csrf
@@ -78,18 +80,20 @@
                             </div>
                         </form>
                     </div>
+                    <!-- Đơn hàng của bạn -->
                     <div class="tab-pane fade" id="account-info">
                         <div class="card-body pb-2">
-                            <table>
+                            <table class="w-100">
                                 <thead>
                                     @if(is_null($orderdetails))
                                     <h5>Bạn chưa thích sản phẩm nào</h5>
                                     @else
-                                    <tr>
-                                        <th>Tên sản phẩm</th>
-                                        <th class="text-center">Giá</th>
-                                        <th>Số lượng</th>
-                                        <th class="text-center">Thành tiền</th>
+                                    <tr class="row">
+                                        <th class="col-md-4 text-center">Tên sản phẩm</th>
+                                        <th class="col-md text-center">Giá</th>
+                                        <th class="col-md text-center">Số lượng</th>
+                                        <th class="col-md text-center">Thành tiền</th>
+                                        <th class="col-md text-center">Xác nhận</th>
                                     </tr>
                                     @endif
                                 </thead>
@@ -100,16 +104,23 @@
                                     @foreach($orderdetails as $detail)
                                     @foreach($orders as $orderdetail)
                                     @if($orderdetail->user_id == Auth::user()->id && $detail->order_id == $orderdetail->id)
-                                    <tr>
-                                        <td>{{ $detail->product->name }}</td>
-                                        <td class="text-end">{{ number_format($detail->price) }} VNĐ</td>
-                                        <td class="text-center">{{ $detail->quantity }}</td>
-                                        <td>
+                                    <tr class="row">
+                                        <td class="col-md-4 text-center">{{ $detail->product->name }}</td>
+                                        <td class="col-md text-center">{{ number_format($detail->price) }} VNĐ</td>
+                                        <td class="col-md text-center">{{ $detail->quantity }}</td>
+                                        <td class="col-md text-center">
                                             @php
                                             $itemTotal = $detail->price * $detail->quantity;
                                             $totalPrice += $itemTotal;
                                             @endphp
                                             {{ number_format($itemTotal) }} VNĐ
+                                        </td>
+                                        <td class="col-md text-center">
+                                            <form action="{{route('delete_orderdetail')}}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="order_id" value="{{$detail->id}}">
+                                                <button type="submit" class="btn-xacnhan">Đã Nhận Hàng</button>
+                                            </form>
                                         </td>
                                     </tr>
                                     @endif
@@ -117,25 +128,22 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            <p style="    font-size: 25px;font-weight: 600;margin: 50px 0;">Tổng giá: {{ number_format($totalPrice) }} VNĐ</p>
-                        </div>
-                        <div class="text-right mt-3" style="float: right;">
-                            <button type="button" class="btn btn-primary">Save changes</button>&nbsp;
-                            <button type="button" class="btn btn-default">Cancel</button>
+                            <p style="font-size: 25px;font-weight: 600;margin: 50px 0;text-align: end;">Tổng giá: {{ number_format($totalPrice) }} VNĐ</p>
                         </div>
                     </div>
+                    <!-- Sản phẩm yêu thích -->
                     <div class="tab-pane fade" id="account-like">
                         <div class="card-body pb-2">
-                            <table>
+                            <table class="w-100">
                                 <thead>
                                     @if(is_null($likeproducts))
                                     <h5>Bạn chưa thích sản phẩm nào</h5>
                                     @else
-                                    <tr>
-                                        <th class="p-2">Tên sản phẩm</th>
-                                        <th class="text-center p-2">Ảnh</th>
-                                        <th class="p-2">Mua hàng</th>
-                                        <th class="p-2">Xoá</th>
+                                    <tr class="row">
+                                        <th class="col-md-5 text-center">Tên sản phẩm</th>
+                                        <th class="col-md text-center">Ảnh</th>
+                                        <th class="col-md text-center">Mua hàng</th>
+                                        <th class="col-md-2 text-center">Xoá</th>
                                     </tr>
                                     @endif
                                 </thead>
@@ -143,16 +151,16 @@
                                     @foreach($likeproducts as $detail)
                                     @foreach($products as $product)
                                     @if($product->id == $detail->product_id && $detail->user_id == Auth::user()->id)
-                                    <tr>
-                                        <td class="text-center p-2">{{ $product->name }}</td>
-                                        <td class="text-center p-2">
+                                    <tr class="row align-items-center">
+                                        <td class="col-md-5 text-center"><b>{{ $product->name }}</b></td>
+                                        <td class="col-md text-center">
                                             <img src="../uploads/{{$product->image}}" alt="" style="width: 100px;height:100px">
                                         </td>
-                                        <td class="text-center p-2">
+                                        <td class="col-md text-center">
                                             <a href="../product/{{ $product->id }}"><button class="km-btn">Mua ngay</button></a>
                                         </td>
-                                        <td class="text-center p-2">
-                                            <form action="{{route('delete_productlike')}}" method="post">
+                                        <td class="col-md-2 text-center">
+                                            <form action="{{route('delete_productlike')}}" method="post" class="d-flex justify-content-center">
                                                 @csrf
                                                 <input type="hidden" name="like_id" value="{{$detail->id}}">
                                                 <button type="submit" class="btn-remove"><i class="fa-solid fa-xmark"></i></button>
