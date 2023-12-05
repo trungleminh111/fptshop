@@ -31,13 +31,21 @@
                         <td class="col-md-5">
                             <div class="d-flex align-items-center">
                                 @foreach ($productAttr as $variant )
-                                @foreach($sizes as $size)
-                                @foreach($colors as $color)
-                                    @if($cart->size_id == $size->id && $cart->color_id == $color->id && $variant->size_id ==  $size->id && $variant->color_id ==  $color->id && $variant->product_id == $cart->product_id )
-                                    <img src="../uploads/{{$variant->image}}" alt="" class="cImg-product">
-                                    @endif
-                                @endforeach
-                                @endforeach
+                                @if($variant->product_id == $product->id)
+                                    @foreach ($productAttr as $variant )
+                                    @foreach($sizes as $size)
+                                    @foreach($colors as $color)
+                                        @if($cart->size_id == $size->id && $cart->color_id == $color->id && $variant->size_id ==  $size->id && $variant->color_id ==  $color->id && $variant->product_id == $cart->product_id )
+                                        <img src="../uploads/{{$variant->image}}" alt="" class="cImg-product">
+                                        @endif
+                                    @endforeach
+                                    @endforeach
+                                    @endforeach
+                                    @php break @endphp
+                                @else
+                                <img src="../uploads/{{$product->image}}" alt="" class="cImg-product">
+                                @php break @endphp
+                                @endif
                                 @endforeach
                                 <div class="cName-product">{{$product->name}}</div>
 

@@ -110,7 +110,6 @@
                                 <i class="fa-solid fa-star star-icon"></i>
                                 <i class="fa-solid fa-star star-icon"></i>
                                 <i class="fa-solid fa-star star-icon"></i>
-                                <span>96 đánh giá</span>
                             </div>
                         </div>
                         <div class="box-likexem">
@@ -124,7 +123,9 @@
                                 @else
                                 <input type="hidden" name="product_id" value="{{ $product->id }}">
                                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                                <button type="submit" class="km-btn"><i class="fa-solid fa-heart"></i></button>
+                                <button type="submit" class="km-btn">
+                                    <i class="fa-solid fa-heart"></i>
+                                </button>
                                 @endguest
                             </form>
                         </div>
@@ -182,7 +183,6 @@
                                 <i class="fa-solid fa-star star-icon"></i>
                                 <i class="fa-solid fa-star star-icon"></i>
                                 <i class="fa-solid fa-star star-icon"></i>
-                                <span>96 đánh giá</span>
                             </div>
                         </div>
                         <div class="box-likexem">

@@ -35,7 +35,9 @@ class ProductVariantController extends AdminController
         $grid->column('color_id', __('Color id'));
         $grid->column('price', __('Price'));
         $grid->column('quantity', __('Quantity'));
-        $grid->column('image', __('Image'));
+        $grid->column('image', __('Image'))->display(function ($image) {
+            return '<img src="../uploads/'.$image.'" style ="width: 40px; height: 40px">';
+        });
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
 

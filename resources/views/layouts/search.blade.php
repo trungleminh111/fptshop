@@ -24,7 +24,6 @@
                                 <i class="fa-solid fa-star star-icon"></i>
                                 <i class="fa-solid fa-star star-icon"></i>
                                 <i class="fa-solid fa-star star-icon"></i>
-                                <span>96 đánh giá</span>
                             </div>
                         </div>
                         <div class="box-likexem">

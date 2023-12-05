@@ -28,7 +28,7 @@ class UserController extends Controller
             'name' => $data['name'],
             'address' => $data['address']
         ]);
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Cập nhật thông tin cá nhân thành công !');
     }
 
     public function upPassProfile(Request $request) {

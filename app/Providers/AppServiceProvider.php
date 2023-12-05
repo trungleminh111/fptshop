@@ -16,6 +16,7 @@ use App\Models\OrderDetail;
 use App\Models\Product;
 use App\Models\User;
 use Auth;
+use Illuminate\Support\Facades\DB;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -55,6 +56,18 @@ class AppServiceProvider extends ServiceProvider
                 $view->with('carts', Cart::all()->where('user_id', Auth::user()->id));
                 $view->with('auths', Auth::user());
             }
+            $review = DB::table('reviewproducts')
+            ->select('product_id', DB::raw('COUNT(product_id) as total_quantity'))
+            ->groupBy('product_id')
+            ->get();
+            $view->with('reviews', $review);
+            
+            $likeproduct = DB::table('likeproducts')
+            ->select('product_id')
+            ->where('user_id', Auth::user()->id)
+            ->get();
+            $view->with('likeproductss', $likeproduct);
+            
         });
     }
 }

@@ -325,6 +325,13 @@ body {
     transition: background-color 0.5s;
 }
 
+.km-btn>.fa-heart {
+    color: #ff0000;
+}
+.km-btn:hover>.fa-heart {
+    color: #FFFFFF;
+}
+
 .km-btn:hover {
     background-color: #cd1818;
     color: #FFFFFF;
@@ -415,11 +422,6 @@ body {
     color: #FFFFFF;
     padding: 5px 10px;
     border-bottom-right-radius: 10px;
-}
-
-.pPhone-price {
-    margin: 10px 0;
-    align-items: start;
 }
 
 .pPhone-btn {

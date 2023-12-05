@@ -33,6 +33,11 @@ tbody::-webkit-scrollbar-thumb
 	background-color: #000000;
 }
 
+.item-cart {
+    padding-top: 10px !important; 
+    border-top: 1px solid #ccc !important;
+}
+
 
 .cart-title{
     background-color: #FFFFFF;

@@ -130,6 +130,10 @@ body {
     width: 30%;
     float: left;
   }
+
+  .content {
+    background-color: unset;
+  }
   
   .content-box {
     padding: 20px;
@@ -314,7 +318,7 @@ body {
   
   .treeview-menu {
     list-style: none;
-    right: -129px;
+    right: -125px;
     z-index: 1000;
     position: absolute;
     background: #fff;

@@ -196,3 +196,9 @@ $('#totop').on('click', function (e) {
     }
 
 })(jQuery);
+
+
+$('.wrapper>aside').removeClass();
+$('.wrapper>aside').addClass('admin-navbar');
+$('.sidebar>ul').removeClass();
+$('.sidebar>ul').addClass('admin-navbar--ul');

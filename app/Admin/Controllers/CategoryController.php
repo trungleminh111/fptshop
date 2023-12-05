@@ -28,7 +28,6 @@ class CategoryController extends AdminController
 
         $grid->column('id', __('Id'));
         $grid->column('name', __('Name'));
-        // $grid->column('image', __('Image'));
         $grid->column('image', __('Image'))->display(function ($image) {
             return '<img src="../uploads/'.$image.'" style ="width: 40px; height: 40px">';
         });

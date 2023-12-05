@@ -28,14 +28,15 @@
                         <h4>{{$product->name}}</h4>
                     </div>
                     <div class="pdRate">
-                        <i class="fa-solid fa-star star-icon"></i>
-                        <i class="fa-solid fa-star star-icon"></i>
-                        <i class="fa-solid fa-star star-icon"></i>
-                        <i class="fa-solid fa-star star-icon"></i>
-                        <i class="fa-solid fa-star star-icon"></i>
                         <span>
-                        90
-                        </span>
+                            @foreach($reviews as $review)
+                            @if($review->product_id == $product->id)
+                            {{$review->total_quantity}} Đánh Giá 
+                            @else
+                                Chưa có đánh giá nào!
+                            @endif 
+                            @php break @endphp
+                            @endforeach </span>
                     </div>
                 </div>
                 <div class="col-md-12">
@@ -146,6 +147,14 @@
         <div class="col-12 review-product">
             <div class="col-12 mb-5">
                 <h2 class="comment-title">Đánh Giá Sản Phẩm</h2>
+                @guest
+                @if (Route::has('login'))
+                <a href="{{ route('login') }}" class="link-topheader" style="border: 1px solid ; color: #000;">
+                    <span><i class="fa-solid fa-circle-user"></i></span>
+                    <span>Đăng nhập để đánh giá</span>
+                </a>
+                @endif
+                @else
                 <form action="{{ route('comment-product') }}" method="post" class="d-flex align-items-center">
                     @csrf
                     <div class="star-check">
@@ -193,6 +202,8 @@
                     <input type="hidden" name="product_id" value="{{ $product->id }}">
                     <button type="submit" class="btn-review">Gửi</button>
                 </form>
+
+                @endguest
             </div>
             <h5 class="col-12">Các đánh giá về sản phẩm</h5>
             @foreach($reviewproducs as $reviewproduc)
@@ -207,14 +218,19 @@
                     <h5 class="nameUser">{{$user->name}}</h5>
                     @endif
                     @endforeach
-                    <div class="pdRate">
+                    <div class="">
                         @for($i = 1 ; $i <= $reviewproduc->sao; $i++)
-                        <i class="fa-solid fa-star star-icon"></i>
-                        @endfor
+                            <i class="fa-solid fa-star star-icon"></i>
+                            @endfor
                     </div>
                     <span class="comment-content">
                         {{$reviewproduc->noidung}}
                     </span>
+                    @guest
+                    @if(Route::has('login'))
+
+                    @endif
+                    @else
                     @if($reviewproduc->user_id == Auth::user()->id)
                     <form action="{{ route('delete_review') }}" method="post">
                         @csrf
@@ -222,8 +238,10 @@
                         <button type="submit" class="btn-deletecomment">Xoá</button>
                     </form>
                     @endif
+                    @endguest
                 </div>
             </div>
+
             @endif
             @endforeach
         </div>
@@ -270,11 +288,7 @@
                 url: "{{ route('get_variant_price') }}",
                 method: 'GET',
                 data: {
-                    product_id: {
-                        {
-                            $product - > id
-                        }
-                    },
+                    product_id: {{$product->id}},
                     size_id: sizeId,
                     color_id: colorId,
                 },

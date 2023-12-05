@@ -102,9 +102,9 @@
                                     $totalPrice = 0;
                                     @endphp
                                     @foreach($orderdetails as $detail)
-                                    @foreach($orders as $orderdetail)
-                                    @if($orderdetail->user_id == Auth::user()->id && $detail->order_id == $orderdetail->id)
-                                    <tr class="row">
+                                    @foreach($orders as $order)
+                                    @if($order->user_id == Auth::user()->id && $detail->order_id == $order->id)
+                                    <tr class="row align-items-center" style="border-top: 1px solid; padding: 20px 0;">
                                         <td class="col-md-4 text-center">{{ $detail->product->name }}</td>
                                         <td class="col-md text-center">{{ number_format($detail->price) }} VNĐ</td>
                                         <td class="col-md text-center">{{ $detail->quantity }}</td>
@@ -123,9 +123,9 @@
                                             </form>
                                         </td>
                                     </tr>
-                                    @endif
-                                    @endforeach
-                                    @endforeach
+                                        @endif
+                                        @endforeach
+                                        @endforeach
                                 </tbody>
                             </table>
                             <p style="font-size: 25px;font-weight: 600;margin: 50px 0;text-align: end;">Tổng giá: {{ number_format($totalPrice) }} VNĐ</p>
@@ -151,7 +151,7 @@
                                     @foreach($likeproducts as $detail)
                                     @foreach($products as $product)
                                     @if($product->id == $detail->product_id && $detail->user_id == Auth::user()->id)
-                                    <tr class="row align-items-center">
+                                    <tr class="row align-items-center" style="border-top: 1px solid; padding: 20px 0;">
                                         <td class="col-md-5 text-center"><b>{{ $product->name }}</b></td>
                                         <td class="col-md text-center">
                                             <img src="../uploads/{{$product->image}}" alt="" style="width: 100px;height:100px">

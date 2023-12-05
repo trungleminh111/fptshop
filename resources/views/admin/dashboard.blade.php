@@ -87,7 +87,6 @@
                             <th>Số lượng đã bán</th>
                         </tr>
                         @foreach($results as $item)
-
                         <tr>
                             @foreach($products as $product)
                             @if($product->id == $item->product_id)
