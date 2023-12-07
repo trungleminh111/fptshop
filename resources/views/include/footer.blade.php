@@ -130,25 +130,18 @@
 </script>
 @endif
 @if (Session::has('success'))
-<script>
-
-    Swal.fire({
-        icon: 'success',
-        text: "{{Session::get('success')}}",
-        background: 'white',
-    })
-</script>
+    <script>
+        Swal.fire({
+            icon: 'success',
+            text: "{{ Session::get('success') }}",
+            background: 'white',
+            onClose: function () {
+                {!! Session::forget('success') !!}
+            }
+        });
+    </script>
 @endif
-@if (Session::has('success'))
-<script>
 
-    Swal.fire({
-        icon: 'success',
-        text: "{{Session::get('success')}}",
-        background: 'white',
-    })
-</script>
-@endif
 @if (Session::has('error'))
 <script>
 

@@ -18,21 +18,18 @@ use App\Models\User;
 use Auth;
 use Illuminate\Support\Facades\DB;
 
-class AppServiceProvider extends ServiceProvider
-{
+class AppServiceProvider extends ServiceProvider {
     /**
      * Register any application services.
      */
-    public function register(): void
-    {
+    public function register(): void {
         //
     }
 
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void
-    {
+    public function boot(): void {
         view()->composer('*', function ($view) {
             $view->with('categorys', Category::all());
             $view->with('products', Product::all());
@@ -45,29 +42,30 @@ class AppServiceProvider extends ServiceProvider
             $view->with('orders', Order::all());
             $view->with('sizes', Size::all());
             $view->with('colors', Color::all());
-            if (!Auth::user()) {
+            if(!Auth::user()) {
                 $view->with('countcart', 0);
             } else {
                 $view->with('countcart', Cart::where('user_id', Auth::user()->id)->count());
             }
-            if (!Auth::user()) {
-                
+            if(!Auth::user()) {
+
             } else {
                 $view->with('carts', Cart::all()->where('user_id', Auth::user()->id));
                 $view->with('auths', Auth::user());
+                $review = DB::table('reviewproducts')
+                    ->select('product_id', DB::raw('COUNT(product_id) as total_quantity'))
+                    ->groupBy('product_id')
+                    ->get();
+                $view->with('reviews', $review);
+
+                $likeproduct = DB::table('likeproducts')
+                    ->select('product_id')
+                    ->where('user_id', Auth::user()->id)
+                    ->get();
+                $view->with('likeproductss', $likeproduct);
             }
-            $review = DB::table('reviewproducts')
-            ->select('product_id', DB::raw('COUNT(product_id) as total_quantity'))
-            ->groupBy('product_id')
-            ->get();
-            $view->with('reviews', $review);
-            
-            $likeproduct = DB::table('likeproducts')
-            ->select('product_id')
-            ->where('user_id', Auth::user()->id)
-            ->get();
-            $view->with('likeproductss', $likeproduct);
-            
+
+
         });
     }
 }
